@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Founder — Dynasty, Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0e0d0b;--panel:#191815;--panel2:#211f1a;--panel3:#2a271f;
+  --line:#322f27;--line2:#403c30;
+  --text:#ece5d4;--muted:#a89e87;--dim:#766e5c;
+  --gold:#c8a24c;--gold2:#e6c87d;--goldink:#2a2110;
+  --green:#83b06b;--red:#cc6a57;--blue:#6f97b8;--purple:#a98cc4;--teal:#5fb6ad;
+  --serif:'Fraunces',Georgia,serif;--sans:'Hanken Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--ink);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+button{font-family:var(--sans);cursor:pointer}
+.app{max-width:1200px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.hud{position:sticky;top:0;z-index:40;background:var(--panel);border-bottom:1px solid var(--line);padding:8px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hud .brand{display:flex;align-items:center;gap:9px}
+.logo{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:16px;color:#fff;flex:none}
+.hud .cname{font-family:var(--serif);font-size:18px;color:var(--gold2);line-height:1}
+.hud .cstage{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px}
+.stat{display:flex;flex-direction:column;line-height:1.15}
+.stat .k{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--dim)}
+.stat .v{font-size:15px}
+.spacer{flex:1}
+.timectl{display:flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 6px}
+.timectl .date{font-family:var(--mono);font-size:12px;color:var(--gold2);min-width:78px;text-align:center}
+.tbtn{background:var(--panel3);border:1px solid var(--line2);color:var(--text);border-radius:6px;padding:5px 9px;font-size:13px}
+.tbtn:hover{border-color:var(--gold);color:var(--gold2)}
+.tbtn.go{background:var(--gold);color:var(--goldink);border-color:var(--gold);font-weight:600}
+.tabs{display:flex;gap:2px;padding:0 12px;background:var(--panel);border-bottom:1px solid var(--line);overflow-x:auto;position:sticky;top:51px;z-index:30}
+.tab{background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);padding:11px 13px;font-size:14px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(--text)}
+.tab.on{color:var(--gold2);border-bottom-color:var(--gold)}
+.tab .badge{background:var(--red);color:#fff;border-radius:9px;font-size:10px;padding:0 6px;font-family:var(--mono)}
+.main{padding:16px;flex:1}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.col{flex:1;min-width:270px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px}
+.card h3{font-size:16px;color:var(--gold2);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card h3 .sub{font-family:var(--sans);font-size:12px;color:var(--dim);font-weight:400}
+.sectionttl{font-family:var(--serif);color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1.4px;margin:2px 0 9px}
+.metric{background:var(--panel2);border-radius:9px;padding:9px 11px}
+.metric .k{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--dim)}
+.metric .v{font-family:var(--mono);font-size:20px;margin-top:2px}
+.metric .d{font-size:11px;margin-top:1px}
+.up{color:var(--green)}.down{color:var(--red)}.flat{color:var(--dim)}
+.grid{display:grid;gap:9px}
+.btn{background:var(--panel3);border:1px solid var(--line2);color:var(--text);border-radius:8px;padding:8px 12px;font-size:13px}
+.btn:hover{border-color:var(--gold);color:var(--gold2)}
+.btn.primary{background:var(--gold);color:var(--goldink);border-color:var(--gold);font-weight:600}
+.btn.primary:hover{background:var(--gold2)}
+.btn.sm{padding:5px 9px;font-size:12px;border-radius:6px}
+.btn.ghost{background:none}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;border:1px solid var(--line2);color:var(--muted);background:var(--panel2)}
+.tag.gold{color:var(--gold2);border-color:var(--gold);background:rgba(200,162,76,.08)}
+.bar{height:6px;background:var(--panel3);border-radius:4px;overflow:hidden}
+.bar>span{display:block;height:100%;background:var(--gold);border-radius:4px}
+.bar.green>span{background:var(--green)}.bar.blue>span{background:var(--blue)}.bar.teal>span{background:var(--teal)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--dim);font-weight:500;font-size:10px;text-transform:uppercase;letter-spacing:.6px;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:8px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:none}
+tr.click{cursor:pointer}tr.click:hover{background:var(--panel2)}
+.feed{max-height:560px;overflow:auto}
+.feeditem{display:flex;gap:9px;padding:8px 4px;border-bottom:1px solid var(--line)}
+.feeditem .dot{width:7px;height:7px;border-radius:50%;background:var(--dim);margin-top:6px;flex:none}
+.feeditem.f-money .dot{background:var(--green)}.feeditem.f-rival .dot{background:var(--red)}
+.feeditem.f-people .dot{background:var(--blue)}.feeditem.f-world .dot{background:var(--gold)}.feeditem.f-deal .dot{background:var(--purple)}
+.feeditem .when{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.feeditem .txt{font-size:13px;color:var(--muted)}
+.portrait{image-rendering:pixelated;border-radius:8px;background:var(--panel2);display:block}
+.pcard{display:flex;gap:11px;align-items:center}
+.muted{color:var(--muted)}.dim{color:var(--dim)}.gold{color:var(--gold2)}.center{text-align:center}
+.flexb{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sep{height:1px;background:var(--line);margin:13px 0}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{background:var(--panel2);border:1px solid var(--line2);color:var(--muted);border-radius:8px;padding:7px 11px;font-size:13px}
+.pill.on{background:var(--gold);color:var(--goldink);border-color:var(--gold);font-weight:600}
+.pill:hover{border-color:var(--gold)}
+input[type=text],input[type=number],select{background:var(--panel2);border:1px solid var(--line2);color:var(--text);border-radius:8px;padding:8px 10px;font-size:14px;font-family:var(--sans);width:100%}
+label.fld{display:block;font-size:11px;color:var(--muted);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.6px}
+.range{width:100%}
+.colist{display:flex;align-items:center;gap:10px;padding:9px;border:1px solid var(--line);border-radius:9px;margin-bottom:8px;background:var(--panel2)}
+.colist .logo{width:34px;height:34px;border-radius:8px}
+/* overlay */
+.overlay{position:fixed;inset:0;background:rgba(6,5,4,.76);z-index:100;display:flex;align-items:center;justify-content:center;padding:18px}
+.modal{background:var(--panel);border:1px solid var(--line2);border-radius:14px;max-width:580px;width:100%;max-height:88vh;overflow:auto;padding:22px;position:relative}
+.modal.wide{max-width:820px}
+.modal h2{font-size:23px;color:var(--gold2);margin-bottom:4px}
+.choice{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:9px;color:var(--text);font-size:14px}
+.choice:hover{border-color:var(--gold);background:var(--panel3)}
+.choice .eff{font-size:12px;color:var(--dim);margin-top:3px}
+/* map */
+.mapwrap{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0a0e12}
+#worldmap{display:block;width:100%;height:520px;cursor:grab;touch-action:none;background:radial-gradient(circle at 50% 40%, #10161d 0%, #0a0d11 100%)}
+#worldmap.drag{cursor:grabbing}
+.maphint{position:absolute;top:10px;left:12px;font-size:12px;color:var(--muted);background:rgba(20,19,16,.7);border:1px solid var(--line);border-radius:8px;padding:5px 10px;pointer-events:none}
+.mapzoom{position:absolute;bottom:12px;right:12px;display:flex;flex-direction:column;gap:5px}
+.mapzoom button{width:34px;height:34px;border-radius:8px;background:var(--panel2);border:1px solid var(--line2);color:var(--gold2);font-size:18px}
+.citypanel{position:absolute;top:0;right:0;height:100%;width:330px;max-width:80%;background:var(--panel);border-left:1px solid var(--line2);padding:16px;overflow:auto;transform:translateX(100%);transition:transform .22s ease;box-shadow:-12px 0 30px rgba(0,0,0,.4)}
+.citypanel.open{transform:translateX(0)}
+.land{fill:#1d2a22;stroke:#26362c;stroke-width:.6}
+.citydot{fill:var(--gold);stroke:#1a1812;stroke-width:.5;cursor:pointer}
+.citydot.mine{fill:var(--green)}
+.citydot:hover{fill:var(--gold2)}
+.citylabel{fill:var(--text);font-family:var(--sans);font-size:9px;pointer-events:none;paint-order:stroke;stroke:#0a0d11;stroke-width:2px}
+.subtile{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;cursor:pointer;background:var(--panel2)}
+.subtile:hover{border-color:var(--gold)}
+.subtile .hot{font-size:10px;color:var(--green)}
+/* create */
+.setup{max-width:760px;margin:34px auto;padding:0 16px}
+.setup .hero{text-align:center;margin-bottom:22px}
+.setup .hero h1{font-size:40px;color:var(--gold2);letter-spacing:1px}
+.setup .hero p{color:var(--muted);margin-top:6px}
+.swatches{display:flex;gap:7px;flex-wrap:wrap}
+.swatch{width:30px;height:30px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+.swatch.on{border-color:var(--gold2)}
+.creategrid{display:grid;grid-template-columns:170px 1fr;gap:20px}
+@media(max-width:620px){.creategrid{grid-template-columns:1fr}.citypanel{width:88%}}
+.scrollx{overflow-x:auto}
+.statbadge{font-family:var(--mono);font-size:11px;color:var(--gold2)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="modalroot"></div>
+<script>
+"use strict";
+/* ===================== FOUNDER — DYNASTY, INC. (rebuild) ===================== */
+function rngFrom(s){let t=s>>>0;return function(){t=(t+0x6D2B79F5)>>>0;let x=Math.imul(t^(t>>>15),t|1);x^=x+Math.imul(x^(x>>>7),x|61);return ((x^(x>>>14))>>>0)/4294967296;};}
+let RNG=rngFrom((Date.now())>>>0);
+function rnd(){return RNG();}
+function ri(a,b){return Math.floor(rnd()*(b-a+1))+a;}
+function pick(a){return a[Math.floor(rnd()*a.length)];}
+function chance(p){return rnd()<p;}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+let _uid=0;function uid(){return 'x'+(_uid++).toString(36)+Math.floor(rnd()*1e6).toString(36);}
+function hash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0);}
+function srnd(seed){return rngFrom(hash(seed));}
+function money(m){if(m==null||isNaN(m))return '$0';const neg=m<0;let v=Math.abs(m),s;
+ if(v>=1e6)s='$'+(v/1e6).toFixed(2)+'T';else if(v>=1e3)s='$'+(v/1e3).toFixed(2)+'B';
+ else if(v>=1)s='$'+v.toFixed(v<10?1:0)+'M';else s='$'+Math.round(v*1000)+'K';
+ return (neg?'-':'')+s;}
+function pct(x){return (x*100).toFixed(x<0.095?1:0)+'%';}
+function users(n){if(n>=1e9)return (n/1e9).toFixed(1)+'B';if(n>=1e6)return (n/1e6).toFixed(1)+'M';if(n>=1e3)return (n/1e3).toFixed(0)+'K';return Math.round(n).toString();}
+
+/* ---------- INDUSTRIES & SUBGENRES ---------- */
+const INDUSTRIES=[
+ {key:'tech',name:'Technology',color:'#5b8def',subs:['Social Networks','Search Engines','E-Commerce','Cloud & SaaS','Mobile Apps','Fintech Apps','Cybersecurity','AI & Data']},
+ {key:'health',name:'Healthcare',color:'#3fb98f',subs:['Biotech','Pharma','Medical Devices','Health Insurance','Hospitals & Clinics','Telehealth','Diagnostics','Mental Health']},
+ {key:'fin',name:'Finance',color:'#c8a24c',subs:['Retail Banking','Investment Banking','Asset Management','Insurance','Payments','Crypto','Lending','PropTech']},
+ {key:'cons',name:'Consumer & Retail',color:'#e07a5f',subs:['Apparel','Food & Beverage','Grocery','Restaurants','Beauty','Home Goods','Luxury','DTC Brands']},
+ {key:'media',name:'Media & Entertainment',color:'#b06ad6',subs:['Streaming','Gaming','Film & TV','Music','Publishing','Social Media','Advertising','Esports']},
+ {key:'energy',name:'Energy & Industrial',color:'#d99a3f',subs:['Oil & Gas','Renewables','Utilities','Mining','Manufacturing','Chemicals','Construction','Aerospace']},
+ {key:'logi',name:'Logistics & Mobility',color:'#6fb3c4',subs:['Freight & Shipping','Ride-Share','Food Delivery','Trucking','Airlines','Warehousing','Autonomous Vehicles','Space']},
+];
+const NET_WORDS=['Social','Search','Commerce','Payments','Ride','Delivery','Streaming','Media','Esports','Mobile','Crypto','Marketplace'];
+const CAP_WORDS=['Biotech','Pharma','Devices','Hospitals','Oil','Mining','Manufacturing','Chemicals','Construction','Aerospace','Airlines','Trucking','Autonomous','Space','Utilities','Renewables','Freight'];
+const LOWMARGIN=['Grocery','Restaurants','Airlines','Food','Retail','Trucking','Construction','Delivery','Apparel','Manufacturing'];
+const HIGHMARGIN=['SaaS','Software','Cloud','Pharma','Biotech','Asset','Investment','Luxury','Search','Social','Payments','Insurance'];
+let SUBS=[];const SUBBY={};
+function buildSubs(){
+ SUBS=[];INDUSTRIES.forEach(ind=>{ind.subs.forEach((nm,j)=>{
+  const id=ind.key+':'+j;const r=srnd(id);
+  let net=0.1+r()*0.25, cap=0.15+r()*0.25, margin=0.1+r()*0.18, growth=0.02+r()*0.06;
+  NET_WORDS.forEach(w=>{if(nm.includes(w))net=clamp(net+0.5,0,0.95);});
+  CAP_WORDS.forEach(w=>{if(nm.includes(w))cap=clamp(cap+0.5,0,0.95);});
+  LOWMARGIN.forEach(w=>{if(nm.includes(w))margin=clamp(margin-0.07,0.04,0.5);});
+  HIGHMARGIN.forEach(w=>{if(nm.includes(w))margin=clamp(margin+0.16,0.04,0.55);});
+  if(ind.key==='tech')growth+=0.03; if(ind.key==='health'){growth+=0.015;cap=clamp(cap+0.2,0,0.95);}
+  const indScale={tech:1,health:1.7,fin:1.8,cons:1.3,media:1,energy:2.2,logi:1.5}[ind.key];
+  const base=(380+r()*1400)*indScale; // annual $M per region
+  const arpu=20+r()*180; // $/user/yr for user metric
+  const o={id,ind:ind.key,indName:ind.name,name:nm,color:ind.color,net,cap,margin,growth,base,arpu};
+  SUBS.push(o);SUBBY[id]=o;
+ });});
+}
+buildSubs();
+
+/* ---------- REGIONS & CITIES ---------- */
+const REGIONS={na:'North America',sa:'South America',eu:'Europe',mea:'Middle East & Africa',asia:'Asia',oce:'Oceania'};
+const REGION_W={ // per-industry market multiplier
+ na:{tech:1.3,health:1.3,fin:1.3,cons:1.2,media:1.3,energy:1.1,logi:1.1},
+ sa:{tech:.8,health:.8,fin:.8,cons:1.0,media:.9,energy:1.1,logi:.9},
+ eu:{tech:1.0,health:1.2,fin:1.2,cons:1.1,media:1.1,energy:1.0,logi:1.0},
+ mea:{tech:.8,health:.8,fin:.9,cons:.9,media:.8,energy:1.8,logi:1.0},
+ asia:{tech:1.3,health:1.0,fin:1.0,cons:1.3,media:1.1,energy:1.3,logi:1.4},
+ oce:{tech:.7,health:.8,fin:.8,cons:.8,media:.7,energy:1.0,logi:.8},
+};
+const CITIES=[
+ {key:'sf',name:'San Francisco',x:159,y:133,region:'na',hubs:['tech','fin']},
+ {key:'la',name:'Los Angeles',x:171,y:143,region:'na',hubs:['media','tech']},
+ {key:'sea',name:'Seattle',x:160,y:108,region:'na',hubs:['tech','logi']},
+ {key:'aus',name:'Austin',x:228,y:152,region:'na',hubs:['tech','energy']},
+ {key:'nyc',name:'New York',x:294,y:126,region:'na',hubs:['fin','media']},
+ {key:'bos',name:'Boston',x:303,y:122,region:'na',hubs:['health','fin']},
+ {key:'chi',name:'Chicago',x:257,y:123,region:'na',hubs:['logi','fin']},
+ {key:'tor',name:'Toronto',x:280,y:118,region:'na',hubs:['fin','tech']},
+ {key:'sao',name:'São Paulo',x:371,y:291,region:'sa',hubs:['fin','cons']},
+ {key:'lon',name:'London',x:500,y:98,region:'eu',hubs:['fin','media']},
+ {key:'par',name:'Paris',x:507,y:105,region:'eu',hubs:['cons','media']},
+ {key:'ber',name:'Berlin',x:537,y:96,region:'eu',hubs:['tech','energy']},
+ {key:'sto',name:'Stockholm',x:550,y:78,region:'eu',hubs:['tech','health']},
+ {key:'tlv',name:'Tel Aviv',x:597,y:148,region:'mea',hubs:['tech','health']},
+ {key:'dxb',name:'Dubai',x:653,y:165,region:'mea',hubs:['fin','logi']},
+ {key:'lag',name:'Lagos',x:509,y:214,region:'mea',hubs:['cons','fin']},
+ {key:'blr',name:'Bangalore',x:715,y:197,region:'asia',hubs:['tech','health']},
+ {key:'sin',name:'Singapore',x:788,y:226,region:'asia',hubs:['fin','logi']},
+ {key:'shz',name:'Shenzhen',x:817,y:172,region:'asia',hubs:['tech','energy']},
+ {key:'sha',name:'Shanghai',x:837,y:150,region:'asia',hubs:['fin','cons']},
+ {key:'tok',name:'Tokyo',x:887,y:139,region:'asia',hubs:['tech','media']},
+ {key:'syd',name:'Sydney',x:920,y:317,region:'oce',hubs:['fin','energy']},
+];
+const CITYBY={};CITIES.forEach(c=>CITYBY[c.key]=c);
+function cityHubBoost(city,indKey){return city.hubs.includes(indKey)?1.4:1.0;}
+
+/* ---------- PORTRAITS (pixel, customizable, heritable) ---------- */
+const SKIN=['#f6dcc0','#ecc09c','#d29a6e','#b07a4e','#8a5a36','#5e3a22'];
+const SKIN_LBL=['Porcelain','Light','Tan','Bronze','Brown','Deep'];
+const HAIRC=['#1d1714','#3a2a1c','#5a3d26','#7a5a34','#9a7a44','#a8a29a','#caa24a','#7a2f2f'];
+const HAIRC_LBL=['Black','Dark Brown','Brown','Light Brown','Blond','Grey','Auburn','Red'];
+const EYEC=['#4a3120','#33514f','#3a577a','#4a6741','#6b4a2a'];
+const EYEC_LBL=['Brown','Green','Blue','Hazel','Amber'];
+const HAIRSTYLES=['short','side','buzz','curly','long','bun','bald'];
+function shadeHex(c,a){let n=parseInt(c.slice(1),16),R=(n>>16)&255,G=(n>>8)&255,B=n&255;R=clamp(R+a,0,255);G=clamp(G+a,0,255);B=clamp(B+a,0,255);return '#'+((1<<24)+(R<<16)+(G<<8)+B).toString(16).slice(1);}
+const JACKETS=['#33506b','#3b3f47','#5a3a44','#3f5a4a','#4a4036','#2e3138','#5a4a6a','#6a4030','#324a52','#2c2a30'];
+const NECKC=['#7a263a','#264a7a','#2f6e56','#6a5a1f','#5a2e6a','#333','#b04a30'];
+function defaultAppearance(fem){
+ return {fem:!!fem,sk:1,hr:1,ey:0,style:fem?'long':'short',
+  jacket:pick(JACKETS),shirt:pick(['#ffffff','#eef2f6','#dfe6ec','#2a2d33']),cut:pick(['single','single','double']),
+  neck:fem?pick(['none','open']):pick(['tie','tie','open','bowtie']),neckcol:pick(NECKC),
+  glasses:chance(.4),fac:fem?'none':pick(['none','none','stubble','beard','must']),acccol:pick(['#caa64a','#cdd2d6','#b04a30'])};
+}
+function randomAppearance(){const a=defaultAppearance(chance(.5));a.sk=ri(0,5);a.hr=ri(0,7);a.ey=ri(0,4);a.style=pick(a.fem?['long','long','short','side','bun']:['short','side','buzz','curly','short']);return a;}
+function childAppearance(parent){
+ const a=randomAppearance();
+ a.sk=parent.app.sk; // inherit race
+ a.hr=chance(.8)?parent.app.hr:ri(0,7);
+ a.ey=chance(.6)?parent.app.ey:ri(0,4);
+ a.fem=chance(.5);a.style=pick(a.fem?['long','short','side','bun']:['short','side','buzz','curly']);
+ if(a.fem)a.fac='none';
+ return a;
+}
+function drawPortrait(canvas,c){
+ const a=c.app,W=24,H=30;canvas.width=W;canvas.height=H;const ctx=canvas.getContext('2d');
+ const sk=SKIN[a.sk],skD=shadeHex(sk,-30),hr=HAIRC[a.hr],hrD=shadeHex(hr,-18),ey=EYEC[a.ey];
+ const bg1='#e7e0d0',bg2='#d3c8ae';
+ function p(x,y,col){if(x<0||y<0||x>=W||y>=H)return;ctx.fillStyle=col;ctx.fillRect(x,y,1,1);}
+ function R(x0,y0,x1,y1,col){for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)p(x,y,col);}
+ R(0,0,W-1,H-1,bg1);R(0,17,W-1,H-1,bg2);
+ R(1,21,22,29,a.jacket);R(2,20,21,20,a.jacket);
+ R(8,21,15,21,a.shirt);R(9,22,14,22,a.shirt);R(10,23,13,29,a.shirt);
+ const lap=shadeHex(a.jacket,a.cut==='double'?20:13);
+ p(8,22,lap);p(9,23,lap);p(10,24,lap);p(15,22,lap);p(14,23,lap);p(13,24,lap);
+ if(a.cut==='double'){const b=shadeHex(a.jacket,-30);p(8,25,b);p(8,27,b);p(15,25,b);p(15,27,b);}
+ if(a.neck==='tie'){R(11,21,12,29,a.neckcol);}
+ else if(a.neck==='bowtie'){R(9,21,10,22,a.neckcol);R(13,21,14,22,a.neckcol);}
+ else if(a.neck==='open'){R(10,21,13,23,a.shirt);}
+ R(10,18,13,20,skD);R(10,17,13,17,sk);
+ R(6,6,17,18,sk);p(6,6,bg1);p(17,6,bg1);p(6,18,bg1);p(17,18,bg1);R(7,18,16,18,skD);
+ p(5,12,sk);p(5,13,sk);p(18,12,sk);p(18,13,sk);
+ if(a.style!=='bald'){
+  R(6,3,17,6,hr);R(5,5,5,10,hr);R(18,5,18,10,hr);R(7,2,16,2,hr);
+  if(a.style==='short'){p(6,7,hr);p(17,7,hr);}
+  if(a.style==='buzz')R(6,4,17,5,shadeHex(hr,8));
+  if(a.style==='side'){R(6,6,12,6,hr);p(6,7,hr);p(6,8,hr);}
+  if(a.style==='curly'){R(5,2,18,3,hr);p(5,4,hr);p(18,4,hr);}
+  if(a.style==='long'){R(4,5,5,20,hr);R(18,5,19,20,hr);R(6,3,17,5,hr);}
+  if(a.style==='bun'){R(4,5,5,11,hr);R(18,5,19,11,hr);R(10,0,13,2,hr);}
+ } else {R(5,5,18,7,hr);}
+ R(8,10,10,10,hrD);R(13,10,15,10,hrD);
+ R(8,11,10,12,'#fff');R(13,11,15,12,'#fff');
+ p(9,11,ey);p(9,12,'#1c140e');p(14,11,ey);p(14,12,'#1c140e');
+ p(11,14,skD);p(11,15,skD);p(12,15,skD);
+ if(a.fac==='must')R(9,16,14,16,hr);
+ else if(a.fac==='beard'){R(7,16,16,18,hr);R(6,15,7,17,hr);R(16,15,17,17,hr);}
+ else if(a.fac==='stubble')R(8,16,15,18,shadeHex(sk,-22));
+ R(10,17,13,17,shadeHex(sk,-55));
+ if(a.glasses){const g='#2a2622';R(7,10,11,10,g);R(7,13,11,13,g);p(7,11,g);p(7,12,g);p(11,11,g);p(11,12,g);R(13,10,17,10,g);R(13,13,17,13,g);p(13,11,g);p(13,12,g);p(17,11,g);p(17,12,g);p(12,11,g);}
+}
+
+/* ---------- NAMES ---------- */
+const FIRST_M=['Augustus','Cornelius','Edmund','Harlan','Theo','Marcus','Julian','Victor','Roland','Desmond','Arthur','Felix','Damien','Oscar','Silas','Leon','Hugo','Caspar','Andre','Malik','Ravi','Kenji','Diego','Ezra'];
+const FIRST_F=['Vivienne','Cordelia','Adelaide','Margaux','Helena','Octavia','Beatrix','Mara','Iris','Cleo','Lydia','Rosalind','Camille','Nadia','Sloane','Esme','Priya','Yuki','Aaliyah','Sofia','Imani','Wren','Dahlia','Noor'];
+const SURNAMES=['Vance','Calloway','Sterling','Marchetti','Ashworth','Devereux','Hawthorne','Albright','Rourke','Beaumont','Voss','Lindqvist','Okonkwo','Tanaka','Reyes','Salazar','Whitlock','Caine','Drummond','Adeyemi','Nakamura','Kapoor','Mendes','Bergström'];
+const CO_PRE=['Nimbus','Vertex','Lumen','Quanta','Hearth','Orbit','Nova','Pulse','Cobalt','Vela','Aria','Strata','Forge','Kindred','Halcyon','Meridian','Atlas','Zephyr','Cedar','Onyx','Sable','Fathom','Beacon','Tally','Drift','Verve','Loop','Cinder','Maple','Ember','Flux','Hatch','Bolt','Crest','Vireo','Lattice','Pylon','Aster','Mosaic','Wisp'];
+const CO_SUF={tech:['Labs','AI','','Soft','Tech','Hub','ly','.io','Stack'],health:['Bio','Health','Care','Med','Rx','Therapeutics','Labs'],fin:['Capital','Pay','Bank','Financial','Fund','Markets'],cons:['& Co','Goods','Brands','Market','Supply'],media:['Media','Studios','Network','Play','Stream'],energy:['Energy','Power','Industries','Dynamics','Grid'],logi:['Logistics','Freight','Mobility','Transit','Lines']};
+const usedCoNames={};
+function genCompanyName(indKey){
+ for(let i=0;i<30;i++){let n=pick(CO_PRE)+(chance(.6)?(' '+pick(CO_SUF[indKey])):pick(CO_SUF[indKey]));n=n.replace(/  +/g,' ').trim();if(!usedCoNames[n]){usedCoNames[n]=1;return n;}}
+ return pick(CO_PRE)+ri(1,999);
+}
+function genLogo(indKey,name){const ind=INDUSTRIES.find(i=>i.key===indKey);const r=srnd(name);const c1=ind.color;const c2=shadeHex(c1,r()>.5?-40:30);return {c1,c2,glyph:name.replace(/[^A-Za-z]/g,'').charAt(0).toUpperCase()||'•'};}
+
+/* ---------- CHARACTERS ---------- */
+const STATKEYS=['vision','product','growth','finance','grit'];
+const STATLBL={vision:'Vision',product:'Product',growth:'Growth',finance:'Finance',grit:'Grit'};
+const TRAITS=['Visionary','Hacker','Growth Hacker','Closer','Relentless','Charismatic','Frugal','Bold','Analytical','Magnetic','Workaholic','Contrarian'];
+function makeStats(power){const o={};STATKEYS.forEach(k=>o[k]=clamp(Math.round(5+power*9+ri(-3,4)),1,20));return o;}
+function makeCharacter(o){o=o||{};const app=o.app||randomAppearance();const fem=app.fem;
+ const name=o.name||((fem?pick(FIRST_F):pick(FIRST_M))+' '+(o.surname||pick(SURNAMES)));
+ const traits=o.traits||[pick(TRAITS),pick(TRAITS)];
+ return {id:uid(),name,app,fem,stats:o.stats||makeStats(o.power!=null?o.power:rnd()*.7+.15),
+  traits:[...new Set(traits)],age:o.age!=null?o.age:ri(26,42),health:clamp(72+ri(-12,24),20,100),
+  role:o.role||'—',family:o.family||null,alive:true,salary:o.salary||0};
+}
+function overall(c){return Math.round((c.stats.vision+c.stats.product+c.stats.growth+c.stats.finance)/4*5);}
+
+/* ===================== GAME STATE ===================== */
+let G=null;const SAVEKEY='founder_dynasty_v2';
+const STAGES=['Bootstrapped','Seed','Series A','Series B','Series C','Series D','Public'];
+
+function makeCompany(o){
+ const sub=SUBBY[o.subId];
+ const name=o.name||genCompanyName(sub.ind);
+ return {id:uid(),name,logo:genLogo(sub.ind,name),isPlayer:!!o.isPlayer,
+  industry:sub.ind,founderId:o.founderId||null,
+  product:o.product!=null?o.product:clamp(ri(20,70),1,100),
+  brand:o.brand!=null?o.brand:clamp(ri(5,55),1,100),
+  scale:o.scale!=null?o.scale:clamp(ri(10,60),1,100),
+  cash:o.cash!=null?o.cash:ri(1,20),
+  stage:o.stage||'Seed',ownership:o.ownership!=null?o.ownership:1,
+  employees:o.employees!=null?o.employees:ri(4,40),
+  markets:[{subId:o.subId,region:o.region,city:o.city||null,traction:o.traction!=null?o.traction:(2+rnd()*8)}],
+  revenue:0,valuation:0,alive:true,age:0,profitable:false,hqCity:o.city||null};
+}
+
+function newWorld(){
+ // populate ~120 companies across world
+ const target=120;
+ for(let i=0;i<target;i++){
+  const sub=pick(SUBS);const city=pick(CITIES);const region=city.region;
+  const big=chance(.18);
+  const co=makeCompany({subId:sub.id,region,city:city.key,
+   product:big?ri(55,90):ri(20,65),brand:big?ri(45,85):ri(5,50),scale:big?ri(50,95):ri(8,55),
+   cash:big?ri(40,400):ri(1,25),stage:big?pick(['Series C','Series D','Public']):pick(['Seed','Series A','Series B']),
+   employees:big?ri(200,4000):ri(5,120),traction:big?(15+rnd()*40):(2+rnd()*10),ownership:big?(0.2+rnd()*0.4):(0.4+rnd()*0.5)});
+  co.founderId=null;
+  G.companies.push(co);
+ }
+ recalcAllFinancials();
+}
+
+function newGame(setup){
+ RNG=rngFrom((Date.now()^hash(setup.dynasty))>>>0);_uid=0;Object.keys(usedCoNames).forEach(k=>delete usedCoNames[k]);
+ G={year:2025,month:1,endYear:2125,
+  dynasty:setup.dynasty,difficulty:setup.difficulty,
+  companies:[],chars:{},playerCoId:null,founderId:null,heirId:null,
+  feed:[],eventQueue:[],auto:false,gameOver:false,phase:'play',
+  macro:1.0,exits:0,netWorth:0,prestige:0,
+  lastVal:0,history:[],
+  personalCash:0.25,salary:0,assets:[],teams:[],industryMacro:{tech:1,health:1,fin:1,cons:1,media:1,energy:1,logi:1},sportsMacro:1,assetMacro:{},narr:[],wealthHist:[]};
+ initWealth();
+ // founder
+ const f=makeCharacter({app:setup.app,name:setup.founderName,surname:setup.dynasty,age:setup.age,role:'Founder & CEO',family:'dynasty',power:.6,stats:setup.stats});
+ G.chars[f.id]=f;G.founderId=f.id;
+ // spouse + maybe kids later (born during play)
+ const sp=makeCharacter({surname:setup.dynasty,age:f.age+ri(-3,3),role:'Family',family:'dynasty',power:.4});
+ sp.app.sk=f.app.sk; // (flavor) align household
+ G.chars[sp.id]=sp;f.spouseId=sp.id;
+ newWorld();
+ // player company
+ const sub=SUBBY[setup.subId];
+ const co=makeCompany({subId:setup.subId,region:CITYBY[setup.city].region,city:setup.city,isPlayer:true,founderId:f.id,
+  name:setup.company,product:clamp(35+f.stats.product,1,100),brand:10,scale:14,cash:2.5,stage:'Bootstrapped',
+  employees:5,traction:3.0,ownership:1});
+ G.companies.push(co);G.playerCoId=co.id;
+ recalcAllFinancials();
+ addFeed('world',`${f.name} founds ${co.name} — a ${sub.name} startup in ${CITYBY[setup.city].name}.`);
+ G.lastVal=playerCo().valuation;
+ save();
+}
+function playerCo(){return G.companies.find(c=>c.id===G.playerCoId);}
+
+/* ---------- market / economy ---------- */
+function marketKey(subId,region){return subId+'|'+region;}
+function marketSize(subId,region){const sub=SUBBY[subId];return sub.base*REGION_W[region][sub.ind]*G.macro*((G.industryMacro&&G.industryMacro[sub.ind])||1);}
+function companiesInMarket(subId,region){const out=[];G.companies.forEach(c=>{if(!c.alive)return;c.markets.forEach(m=>{if(m.subId===subId&&m.region===region)out.push({c,m});});});return out;}
+function appeal(c){return clamp((c.product*0.6+c.brand*0.4)/100,0.02,1);}
+function avgAppeal(subId,region){const l=companiesInMarket(subId,region);if(!l.length)return 0.3;let s=0;l.forEach(o=>s+=appeal(o.c));return s/l.length;}
+function shareIn(subId,region){
+ const sub=SUBBY[subId];const k=1+sub.net*1.4;
+ const list=companiesInMarket(subId,region);let denom=0;
+ list.forEach(({c,m})=>{m._w=Math.pow(Math.max(0.01,m.traction*appeal(c)),k);denom+=m._w;});
+ list.forEach(({m})=>{m.share=denom>0?m._w/denom:0;});
+ return list;
+}
+function recalcCompany(c){
+ let rev=0,usr=0;
+ c.markets.forEach(m=>{
+  shareIn(m.subId,m.region);
+  const sz=marketSize(m.subId,m.region);
+  m.revenue=(m.share||0)*sz/12; // monthly
+  m.users=(m.share||0)*(sz/SUBBY[m.subId].arpu);
+  rev+=m.revenue;usr+=m.users;
+ });
+ c.revenue=rev;c.users=usr;
+ // valuation
+ const annual=rev*12;let val;
+ if(annual>3){const sub=SUBBY[c.markets[0].subId];let mult=3.5+sub.growth*55;if(c.stage==='Public')mult+=2;mult=clamp(mult,3,16);val=annual*mult;}
+ else{const tr=c.markets.reduce((a,m)=>a+m.traction*appeal(c),0);val=tr*(2.2+SUBBY[c.markets[0].subId].net*4);}
+ val+=Math.max(0,c.cash);
+ c.valuation=Math.max(0.3,val);
+ c.profitable=(rev*marginOf(c)-burnOf(c))>0;
+}
+function marginOf(c){const sub=SUBBY[c.markets[0].subId];return clamp(sub.margin*(0.7+c.scale/180),0.04,0.6);}
+function burnOf(c){return c.employees*0.012 + c.markets.length*0.15 + (c.brand>50?0.3:0.1);}
+function recalcAllFinancials(){G.companies.forEach(c=>{if(c.alive)recalcCompany(c);});}
+
+/* ---------- time engine ---------- */
+function step(){
+ if(G.gameOver)return;
+ G.month++;if(G.month>12){G.month=1;G.year++;yearTick();}
+ tickWorld();
+ tickWealth();
+ tickTeams();
+ maybeEvent();
+ recalcAllFinancials();
+ const pc=playerCo();
+ if(pc&&pc.cash<-12){failCompany();}
+ if(G.year>=G.endYear)endGame('Century complete');
+ if(G.eventQueue.length)G.auto=false;
+ save();render();
+ if(G.auto&&!G.eventQueue.length&&!G.gameOver)scheduleAuto();
+}
+let autoTimer=null;
+function scheduleAuto(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{if(G.auto)step();},560);}
+function toggleAuto(){if(G.gameOver)return;G.auto=!G.auto;if(G.auto&&!G.eventQueue.length)scheduleAuto();else clearTimeout(autoTimer);render();}
+function manualStep(){G.auto=false;clearTimeout(autoTimer);step();}
+
+function tickWorld(){
+ const pc=playerCo();
+ // growth of traction for all companies
+ G.companies.forEach(c=>{if(!c.alive)return;c.age++;
+  const ap=appeal(c);
+  c.markets.forEach(m=>{
+   const sub=SUBBY[m.subId];
+   const avgAp=avgAppeal(m.subId,m.region);
+   // a better-than-average product grows; network effects amplify the gap (challengers can take over)
+   let g=sub.growth*(0.5+ap)-0.012+(ap-avgAp)*(0.05+sub.net*0.11);
+   g=clamp(g,-0.08,0.26);
+   g*=(1-0.55*(m.share||0)); // saturation: can't grow past a market you already own
+   m.traction=clamp(m.traction*(1+g)+ap*0.06,0.2,99999);
+  });
+  // attribute decay (slow — investments should stick)
+  c.product=clamp(c.product-0.10,1,100);c.brand=clamp(c.brand-0.12,1,100);
+  // cash flow
+  const profit=c.revenue*marginOf(c)-burnOf(c);
+  c.cash+=profit;
+  // AI behavior (non-player)
+  if(!c.isPlayer)aiCompany(c);
+ });
+ // macro drift + cycles
+ G.macro*=(1+0.0016 + (chance(0.2)?(rnd()-0.5)*0.01:0));G.macro=clamp(G.macro,0.7,4);
+ // shutdowns
+ G.companies.forEach(c=>{if(c.alive&&!c.isPlayer&&c.cash<-4&&chance(0.4)){c.alive=false;if(c.valuation>40)addFeed('rival',`${c.name} shuts down after running out of runway.`);}});
+ // new startups appear
+ if(chance(0.5)){const sub=pick(SUBS);const city=pick(CITIES);const co=makeCompany({subId:sub.id,region:city.region,city:city.key,product:ri(25,55),brand:ri(4,20),scale:ri(8,30),cash:ri(2,12),stage:'Seed',employees:ri(4,20),traction:1.5+rnd()*3,ownership:.8});G.companies.push(co);if(chance(.25))addFeed('world',`New startup ${co.name} launches in ${city.name} (${sub.name}).`);}
+ // rival M&A
+ if(chance(0.3))aiMergers();
+}
+function aiCompany(c){
+ if(c.cash>6&&chance(0.4)){const spend=c.cash*0.2;c.cash-=spend;if(chance(0.5))c.product=clamp(c.product+spend*0.8,1,100);else c.brand=clamp(c.brand+spend*0.9,1,100);}
+ if(c.cash<3&&c.valuation>20&&chance(0.25)){const raise=c.valuation*0.15;c.cash+=raise;c.ownership=clamp(c.ownership*(1-raise/(c.valuation+raise)),0.05,1);}
+ if(c.valuation>300&&c.markets.length<5&&chance(0.04)){const sub=pick(SUBS);const region=pick(Object.keys(REGIONS));if(!c.markets.some(m=>m.subId===sub.id&&m.region===region)){c.markets.push({subId:sub.id,region,traction:2+rnd()*3});}}
+}
+function aiMergers(){
+ const big=G.companies.filter(c=>c.alive&&!c.isPlayer&&c.valuation>200);
+ if(!big.length)return;const acq=pick(big);
+ const targets=G.companies.filter(c=>c.alive&&!c.isPlayer&&c.id!==acq.id&&c.valuation<acq.valuation*0.4&&c.valuation>15);
+ if(!targets.length)return;const t=pick(targets);const cost=t.valuation*1.3;
+ if(acq.cash>=cost||acq.stage==='Public'){acq.cash-=Math.min(acq.cash,cost);mergeInto(acq,t);if(t.valuation>60)addFeed('deal',`${acq.name} acquires ${t.name} for ${money(cost)}.`);}
+}
+function mergeInto(a,t){
+ t.markets.forEach(tm=>{const m=a.markets.find(x=>x.subId===tm.subId&&x.region===tm.region);if(m)m.traction+=tm.traction*0.85;else a.markets.push({subId:tm.subId,region:tm.region,traction:tm.traction*0.85});});
+ a.product=clamp(Math.max(a.product,t.product),1,100);a.employees+=t.employees;t.alive=false;t.ownerId=a.id;
+}
+
+function yearTick(){
+ Object.values(G.chars).forEach(c=>{if(!c.alive)return;c.age++;
+  if(c.age>60)c.health-=ri(1,4)+Math.floor((c.age-60)/8);c.health=clamp(c.health,0,100);
+  const dc=Math.max(0,(c.age-58)/360)+(c.health<25?0.04:0)+(c.age>85?0.05:0);
+  if(chance(dc))charDies(c);
+ });
+ // births keep dynasty alive
+ const dyn=Object.values(G.chars).filter(c=>c.alive&&c.family==='dynasty');
+ if(dyn.length<10)dyn.filter(c=>c.age>=24&&c.age<=44).forEach(c=>{if(chance(0.16)){const kid=makeCharacter({app:childAppearance(c),surname:G.dynasty,age:0,role:'Family',family:'dynasty',power:.45});kid.parentId=c.id;G.chars[kid.id]=kid;addFeed('people',`${kid.name.split(' ')[0]} is born into the ${G.dynasty} family.`);}});
+ narrativeMaybe();
+}
+function charDies(c){c.alive=false;c.health=0;
+ if(c.id===G.founderId){addFeed('people',`${c.name}, founder of ${playerCo()?playerCo().name:'the company'}, has died at ${c.age}.`);succeed();}
+ else addFeed('people',`${c.name} has passed away at ${c.age}.`);
+}
+function succeed(){
+ let heir=G.heirId&&G.chars[G.heirId]&&G.chars[G.heirId].alive?G.chars[G.heirId]:null;
+ if(!heir){const cand=Object.values(G.chars).filter(c=>c.alive&&c.family==='dynasty'&&c.id!==G.founderId);cand.sort((a,b)=>b.age-a.age);heir=cand[0];}
+ if(!heir){addFeed('world',`With no heir, the ${G.dynasty} family loses control of the company.`);endGame('The line ends');return;}
+ heir.role='Chair & CEO';G.founderId=heir.id;G.heirId=null;
+ const pc=playerCo();if(pc){pc.ownership=clamp(pc.ownership-0.05,0.05,1);pc.founderId=heir.id;}
+ if(heir.age<18)addFeed('world',`${heir.name} inherits as a minor — advisors steer the company.`);
+ G.prestige+=3;
+ queueModal({title:'A New Generation',body:`<p class="muted"><span class="gold">${heir.name}</span> takes the helm of the ${G.dynasty} business empire.</p>`,choices:[{t:'Carry the torch.',fn(){}}]});
+}
+
+/* ---------- events / offers ---------- */
+function maybeEvent(){
+ if(G.eventQueue.length)return;const pc=playerCo();if(!pc)return;
+ // buyout offer
+ if(pc.valuation>120&&pc.stage!=='Public'&&chance(0.05)){
+  const big=G.companies.filter(c=>c.alive&&!c.isPlayer&&c.valuation>pc.valuation*2);
+  if(big.length){const b=pick(big);const offer=pc.valuation*(1.3+rnd()*0.6);
+   queueModal({title:'Acquisition Offer',body:`<p class="muted"><span class="gold">${b.name}</span> offers to acquire ${pc.name} for <span class="num gold">${money(offer)}</span>. Your family would walk away with <span class="num gold">${money(offer*pc.ownership)}</span>.</p>`,choices:[
+    {t:`Sell ${pc.name} and exit.`,eff:'Big windfall. You found a new venture next.',fn(){acceptBuyout(offer);}},
+    {t:'Stay independent.',eff:'Keep building.',fn(){addFeed('deal',`You rebuff ${b.name}'s offer.`);}}
+   ]});return;}
+ }
+ // generic events
+ if(!chance(0.1))return;
+ const pool=[
+  ()=>({title:'Viral Moment',body:'<p class="muted">Your product is having a moment online.</p>',choices:[{t:'Lean in with a marketing blitz (-$3M).',eff:'+brand, +traction',fn(){if(pc.cash>=3){pc.cash-=3;pc.brand=clamp(pc.brand+12,1,100);pc.markets.forEach(m=>m.traction*=1.08);}addFeed('money','Your blitz pays off.');}},{t:'Stay focused on product.',eff:'+product',fn(){pc.product=clamp(pc.product+5,1,100);}}]}),
+  ()=>({title:'Key Hire Available',body:'<p class="muted">A star operator is on the market.</p>',choices:[{t:'Hire them (-$2M, +scale).',fn(){if(pc.cash>=2){pc.cash-=2;pc.scale=clamp(pc.scale+10,1,100);pc.employees+=15;addFeed('people','A key hire joins.');}}},{t:'Pass.',fn(){}}]}),
+  ()=>({title:'Downturn',body:'<p class="muted">Funding markets are freezing up.</p>',choices:[{t:'Cut burn to extend runway.',fn(){pc.employees=Math.round(pc.employees*0.85);addFeed('world','You trim the team to survive.');}},{t:'Raise now at a discount.',fn(){const r=pc.valuation*0.12;pc.cash+=r;pc.ownership=clamp(pc.ownership*(1-r/(pc.valuation+r)),0.05,1);addFeed('money','You raise a down round.');}}]}),
+ ];
+ queueModal(pick(pool)());
+}
+function acceptBuyout(offer){
+ const pc=playerCo();const take=offer*pc.ownership;G.netWorth+=take;G.personalCash=(G.personalCash||0)+take;G.exits++;G.prestige+=6;
+ addFeed('deal',`You sell ${pc.name} for ${money(offer)} — family nets ${money(take)}.`);
+ // exit screen then found again
+ G.eventQueue.push({title:`Acquired for ${money(offer)}`,body:`<p class="muted">${pc.name} is acquired. The ${G.dynasty} family banks <span class="num gold">${money(take)}</span> (lifetime exits: ${G.exits}).</p><p class="muted">Time to do it again.</p>`,choices:[{t:'Found your next venture →',fn(){foundAgain(take);}}]});
+}
+function foundAgain(windfall){
+ const f=G.chars[G.founderId];
+ // mark old company as exited
+ const old=playerCo();if(old){old.isPlayer=false;}
+ G.phase='found';G._foundWindfall=windfall;SCREEN='map';render();
+}
+function failCompany(){
+ const pc=playerCo();addFeed('world',`${pc.name} runs out of money and shuts down.`);
+ if((G.personalCash||0)>5){ // serial founder can try again
+  G.eventQueue.push({title:'Out of Runway',body:`<p class="muted">${pc.name} couldn't make it. But the ${G.dynasty} family still has <span class="num gold">${money(G.netWorth)}</span> from past exits.</p>`,choices:[{t:'Start over with a new idea →',fn(){pc.alive=false;pc.isPlayer=false;G.phase='found';G._foundWindfall=(G.personalCash||0)*0.5;SCREEN='map';render();}}]});
+ } else endGame('Bankruptcy');
+}
+
+/* ---------- player actions ---------- */
+const A={
+ invest(kind){const pc=playerCo();openInvest(kind);},
+ doInvest(kind,amt){const pc=playerCo();if(pc.cash<amt){toast('Not enough cash.');return;}pc.cash-=amt;
+  if(kind==='product')pc.product=clamp(pc.product+amt*1.4,1,100);
+  else if(kind==='brand'){pc.brand=clamp(pc.brand+amt*1.5,1,100);pc.markets.forEach(m=>m.traction*=1.02);}
+  else if(kind==='ops'){pc.scale=clamp(pc.scale+amt*1.2,1,100);pc.employees+=Math.round(amt*6);}
+  addFeed('money',`Invested ${money(amt)} in ${kind}.`);closeModal();recalcAllFinancials();save();render();},
+ raise(){const pc=playerCo();const idx=STAGES.indexOf(pc.stage);if(idx>=STAGES.length-1){toast('Already public.');return;}
+  const next=STAGES[idx+1];const amt=clamp(pc.valuation*(0.15+idx*0.01),1.5,99999);const dil=amt/(pc.valuation+amt);
+  pc.cash+=amt;pc.ownership=clamp(pc.ownership*(1-dil),0.03,1);pc.stage=next;G.prestige+=1;
+  addFeed('money',`Raised ${money(amt)} (${next}). You now own ${pct(pc.ownership)}.`);save();render();},
+ ipo(){const pc=playerCo();if(pc.valuation<800){toast('Need ~$800M valuation to IPO.');return;}if(pc.stage==='Public'){toast('Already public.');return;}
+  const amt=pc.valuation*0.16;pc.cash+=amt;pc.ownership=clamp(pc.ownership*0.88,0.03,1);pc.stage='Public';G.prestige+=10;
+  queueModal({title:'IPO! 🔔',body:`<p class="muted">${pc.name} goes public, raising <span class="num gold">${money(amt)}</span>. The ${G.dynasty} family's stake is worth <span class="num gold">${money(pc.valuation*pc.ownership)}</span>.</p>`,choices:[{t:'Ring the bell.',fn(){}}]});save();render();},
+ openAcquire(){openAcquire();},
+ acquire(id){const pc=playerCo();const t=G.companies.find(c=>c.id===id);if(!t||!t.alive)return;
+  const cost=t.valuation*1.3;const canStock=pc.stage==='Public';
+  if(pc.cash<cost&&!canStock){toast('Not enough cash. Go public to pay in stock.');return;}
+  if(pc.cash>=cost)pc.cash-=cost;else{const dil=cost/(pc.valuation+cost);pc.ownership=clamp(pc.ownership*(1-dil),0.03,1);}
+  mergeInto(pc,t);addFeed('deal',`You acquire ${t.name} for ${money(cost)}.`);G.prestige+=2;closeModal();recalcAllFinancials();save();render();},
+ openExpand(){openExpand();},
+ launch(subId,region){const pc=playerCo();const sub=SUBBY[subId];const home=SUBBY[pc.markets[0].subId];
+  let rel=5; if(sub.ind===home.ind)rel=2; if(pc.markets.some(m=>m.subId===subId))rel=1;
+  const cost=(marketSize(subId,region)*0.012+sub.cap*4)*rel;
+  if(pc.cash<cost){toast('Not enough cash to launch ('+money(cost)+').');return;}
+  if(pc.markets.some(m=>m.subId===subId&&m.region===region)){toast('Already in this market.');return;}
+  pc.cash-=cost;pc.markets.push({subId,region,traction:1.5+pc.brand/40});
+  addFeed('world',`${pc.name} launches ${sub.name} in ${REGIONS[region]} (${money(cost)}).`);closeModal();recalcAllFinancials();save();render();},
+ hire(id){const c=G.talent.find(x=>x.id===id);if(!c)return;const pc=playerCo();const sign=2+overall(c)*0.1;if(pc.cash<sign){toast('Not enough cash.');return;}pc.cash-=sign;c.salary=0.5+overall(c)/30;c.role='Executive';G.chars[c.id]=c;G.talent=G.talent.filter(x=>x.id!==c.id);pc.scale=clamp(pc.scale+overall(c)/12,1,100);addFeed('people',`Hired ${c.name}.`);closeModal();render();},
+ designateHeir(id){G.heirId=id;addFeed('people',`${G.chars[id].name} named as your heir.`);render();}
+};
+window.A=A;
+let _talentInit=false;
+function ensureTalent(){if(!G.talent){G.talent=[];for(let i=0;i<6;i++)G.talent.push(makeCharacter({power:rnd()*.8+.1}));}}
+
+/* ---------- feed / save ---------- */
+function addFeed(t,txt){G.feed.unshift({t,txt,y:G.year,m:G.month});if(G.feed.length>140)G.feed.pop();}
+function monthName(m){return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m-1];}
+function save(){try{localStorage.setItem(SAVEKEY,JSON.stringify(G));}catch(e){}}
+function load(){try{const s=localStorage.getItem(SAVEKEY);if(!s)return false;G=JSON.parse(s);if(!G.talent)G.talent=[];return true;}catch(e){return false;}}
+function hasSave(){try{return !!localStorage.getItem(SAVEKEY);}catch(e){return false;}}
+function wipe(){try{localStorage.removeItem(SAVEKEY);}catch(e){}}
+
+function queueModal(m){G.eventQueue.push(m);}
+function endGame(reason){G.gameOver=true;G.auto=false;clearTimeout(autoTimer);
+ const pc=playerCo();const val=pc?pc.valuation:0;
+ const score=Math.round(personalNetWorth()+G.netWorth+G.prestige*40+G.exits*300+((G.teams||[]).reduce((a,t)=>a+t.titles*500,0)));
+ G.finalScore=score;G.finalReason=reason;save();render();}
+
+/* ===================== RENDER ===================== */
+let SCREEN='company';
+function toast(msg){const t=document.createElement('div');t.textContent=msg;t.style.cssText='position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--panel3);border:1px solid var(--gold);color:var(--gold2);padding:10px 16px;border-radius:9px;z-index:200;font-size:13px';document.body.appendChild(t);setTimeout(()=>t.remove(),1900);}
+function logoHTML(co,size){const s=size||30;return `<div class="logo" style="width:${s}px;height:${s}px;background:linear-gradient(135deg,${co.logo.c1},${co.logo.c2})">${co.logo.glyph}</div>`;}
+
+function render(){
+ const root=document.getElementById('root');
+ if(!G){root.innerHTML=createHTML();bindCreate();return;}
+ if(G.gameOver){root.innerHTML=overHTML();return;}
+ if(G.phase==='found'){root.innerHTML=`<div class="app">${hudHTML()}${tabsHTML()}<div class="main">${mapHTML(true)}</div></div>`;mountPortraits();mountMap(true);if(G.eventQueue.length)showEvent();return;}
+ ensureTalent();initWealth();
+ root.innerHTML=`<div class="app">${hudHTML()}${tabsHTML()}<div class="main">${screenHTML()}</div></div>`;
+ mountPortraits();if(SCREEN==='map')mountMap(false);
+ if(G.eventQueue.length)showEvent();
+}
+function hudHTML(){const pc=playerCo();const f=G.chars[G.founderId];const val=pc?pc.valuation:0;
+ return `<div class="hud">
+  <div class="brand">${pc?logoHTML(pc,30):''}<div><div class="cname">${pc?pc.name:'—'}</div><div class="cstage">${pc?pc.stage:''} · you own ${pc?pct(pc.ownership):'—'}</div></div></div>
+  <div class="stat"><span class="k">Valuation</span><span class="v num gold">${money(val)}</span></div>
+  <div class="stat"><span class="k">Cash</span><span class="v num">${money(pc?pc.cash:0)}</span></div>
+  <div class="stat"><span class="k">Revenue/yr</span><span class="v num">${money(pc?pc.revenue*12:0)}</span></div>
+  <div class="stat"><span class="k">Net Worth</span><span class="v num gold">${money(personalNetWorth())}</span></div>
+  <div class="spacer"></div>
+  <div class="timectl"><button class="tbtn" onclick="manualStep()">▸ Month</button><span class="date">${monthName(G.month)} ${G.year}</span><button class="tbtn ${G.auto?'':'go'}" onclick="toggleAuto()">${G.auto?'❚❚':'▶ Auto'}</button></div>
+ </div>`;}
+function tabsHTML(){const tabs=[['company','Company'],['map','Map'],['compete','Compete'],['deals','Deals'],['wealth','Wealth'],['franchise','Franchise'],['team','Staff'],['dynasty','Dynasty'],['world','World']];
+ return `<div class="tabs">${tabs.map(t=>`<button class="tab ${SCREEN===t[0]?'on':''}" onclick="go('${t[0]}')">${t[1]}</button>`).join('')}<span class="spacer" style="flex:1"></span><button class="tab" onclick="confirmNew()">New Game</button></div>`;}
+function go(s){SCREEN=s;render();}
+window.go=go;window.manualStep=manualStep;window.toggleAuto=toggleAuto;
+function screenHTML(){switch(SCREEN){case 'company':return companyHTML();case 'map':return mapHTML(false);case 'compete':return competeHTML();case 'deals':return dealsHTML();case 'team':return teamHTML();case 'dynasty':return dynastyHTML();case 'world':return worldHTML();case 'wealth':return wealthHTML();case 'franchise':return franchiseHTML();}return '';}
+
+/* COMPANY */
+function companyHTML(){
+ const pc=playerCo();const f=G.chars[pc.founderId]||G.chars[G.founderId];
+ const sub0=SUBBY[pc.markets[0].subId];
+ const attr=(lbl,v,cls)=>`<div class="statrow" style="display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px"><span style="width:64px;color:var(--muted)">${lbl}</span><div class="bar ${cls}" style="flex:1"><span style="width:${v}%"></span></div><span class="num gold" style="width:28px;text-align:right">${Math.round(v)}</span></div>`;
+ return `<div class="row">
+  <div class="col" style="flex:1.25">
+   <div class="card">
+    <h3>${pc.name} <span class="sub">${sub0.name} · ${pc.stage}</span></h3>
+    <div class="grid" style="grid-template-columns:repeat(4,1fr)">
+     <div class="metric"><div class="k">Valuation</div><div class="v gold">${money(pc.valuation)}</div></div>
+     <div class="metric"><div class="k">Revenue/yr</div><div class="v">${money(pc.revenue*12)}</div></div>
+     <div class="metric"><div class="k">Users</div><div class="v">${users(pc.users||0)}</div></div>
+     <div class="metric"><div class="k">Cash</div><div class="v ${pc.cash<2?'down':''}">${money(pc.cash)}</div></div>
+    </div>
+    <div class="sep"></div>
+    <div class="sectionttl">Build the company</div>
+    ${attr('Product',pc.product,'green')}
+    ${attr('Brand',pc.brand,'blue')}
+    ${attr('Scale',pc.scale,'teal')}
+    <div class="pills" style="margin-top:10px">
+     <button class="btn primary" onclick="A.invest('product')">Improve Product</button>
+     <button class="btn" onclick="A.invest('brand')">Marketing</button>
+     <button class="btn" onclick="A.invest('ops')">Hire / Scale</button>
+    </div>
+    <div class="sep"></div>
+    <div class="sectionttl">Capital</div>
+    <div class="pills">
+     <button class="btn" onclick="A.raise()">Raise ${STAGES[Math.min(STAGES.indexOf(pc.stage)+1,STAGES.length-1)]} (~${money(clamp(pc.valuation*0.15,0.5,99999))})</button>
+     <button class="btn" onclick="A.ipo()" ${pc.valuation<800||pc.stage==='Public'?'disabled':''}>IPO</button>
+     <button class="btn" onclick="go('deals')">Acquire a rival</button>
+     <button class="btn" onclick="go('map')">Expand markets</button>
+    </div>
+    <div class="dim" style="font-size:12px;margin-top:8px">Monthly burn ≈ ${money(burnOf(pc))} · margin ${pct(marginOf(pc))} · ${pc.profitable?'<span class="up">profitable</span>':'<span class="down">burning cash</span>'} · ${pc.employees} employees</div>
+   </div>
+   <div class="card" style="margin-top:14px">
+    <h3>Founder</h3>
+    <div class="pcard"><canvas class="portrait" data-char="${f.id}" style="width:72px"></canvas>
+     <div><div style="font-family:var(--serif);font-size:18px;color:var(--gold2)">${f.name}</div>
+     <div class="muted" style="font-size:12px">${f.role} · age ${f.age}</div>
+     <div style="margin-top:5px">${f.traits.map(t=>`<span class="tag gold" style="margin-right:4px">${t}</span>`).join('')}</div></div></div>
+   </div>
+  </div>
+  <div class="col">
+   <div class="card"><h3>Your Markets <span class="sub">${pc.markets.length}</span></h3>
+    ${pc.markets.map(m=>{shareIn(m.subId,m.region);const sub=SUBBY[m.subId];return `<div class="colist"><div class="logo" style="background:linear-gradient(135deg,${sub.color},${shadeHex(sub.color,-40)})">${sub.name[0]}</div><div style="flex:1"><div class="gold" style="font-size:13px">${sub.name}</div><div class="dim" style="font-size:11px">${REGIONS[m.region]} · ${money((m.revenue||0)*12)}/yr</div><div class="bar" style="margin-top:4px"><span style="width:${(m.share||0)*100}%"></span></div></div><div class="num" style="color:var(--gold2);width:46px;text-align:right">${pct(m.share||0)}</div></div>`;}).join('')}
+   </div>
+   <div class="card" style="margin-top:14px"><h3>Feed</h3><div class="feed">${G.feed.slice(0,28).map(feedHTML).join('')}</div></div>
+  </div>
+ </div>`;
+}
+function feedHTML(f){return `<div class="feeditem f-${f.t}"><div class="dot"></div><div><div class="when">${monthName(f.m)} ${f.y}</div><div class="txt">${f.txt}</div></div></div>`;}
+
+/* MAP */
+function mapHTML(founding){
+ const hint=founding?'Drag to pan · scroll to zoom · click a city to found your startup':'Drag to pan · scroll to zoom · click a city to expand there';
+ return `<div class="card" style="padding:10px"><h3 style="padding:0 6px">${founding?'Choose your headquarters':'World Map'} <span class="sub">${founding?'Where will you start?':'expand your company'}</span></h3>
+  <div class="mapwrap">
+   <svg id="worldmap" viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet">
+    <g id="mapcontinents">${continentSVG()}</g>
+    <g id="mapcities">${CITIES.map(ct=>{const mine=!founding&&playerCo()&&playerCo().hqCity===ct.key;return `<circle class="citydot ${mine?'mine':''}" data-city="${ct.key}" cx="${ct.x}" cy="${ct.y}" r="3.4"/>`;}).join('')}</g>
+    <g id="maplabels"></g>
+   </svg>
+   <div class="maphint">${hint}</div>
+   <div class="mapzoom"><button onclick="mapZoom(0.7)">+</button><button onclick="mapZoom(1.4)">−</button></div>
+   <div class="citypanel" id="citypanel"></div>
+  </div>
+ </div>`;
+}
+function continentSVG(){
+ const polys=[
+  '150,75 262,70 300,95 300,130 270,150 245,205 212,192 192,150 150,150 122,120 142,95',
+  '300,212 362,206 392,250 376,322 346,362 326,300 312,250',
+  '486,82 562,80 578,112 540,138 500,132 484,106',
+  '486,150 562,150 582,212 560,282 520,302 500,242 484,190',
+  '578,80 720,74 862,100 902,150 850,202 770,212 700,182 620,150 582,122',
+  '700,180 724,212 700,212',
+  '878,288 944,288 954,332 902,348 874,320',
+  '882,128 896,128 898,150 882,150'
+ ];
+ return polys.map(p=>`<polygon class="land" points="${p}"/>`).join('');
+}
+let MAPVIEW={x:0,y:0,w:1000,h:460};
+function mapZoom(factor,cx,cy){const svg=document.getElementById('worldmap');if(!svg)return;
+ cx=cx!=null?cx:MAPVIEW.x+MAPVIEW.w/2;cy=cy!=null?cy:MAPVIEW.y+MAPVIEW.h/2;
+ let nw=clamp(MAPVIEW.w*factor,150,1000);let nh=nw*(460/1000);
+ MAPVIEW.x=clamp(cx-(cx-MAPVIEW.x)*(nw/MAPVIEW.w),-50,1050-nw);
+ MAPVIEW.y=clamp(cy-(cy-MAPVIEW.y)*(nh/MAPVIEW.h),-30,490-nh);
+ MAPVIEW.w=nw;MAPVIEW.h=nh;applyMapView();}
+window.mapZoom=mapZoom;
+function applyMapView(){const svg=document.getElementById('worldmap');if(!svg)return;
+ svg.setAttribute('viewBox',`${MAPVIEW.x} ${MAPVIEW.y} ${MAPVIEW.w} ${MAPVIEW.h}`);
+ const r=3.4*(MAPVIEW.w/1000);document.querySelectorAll('#mapcities .citydot').forEach(c=>c.setAttribute('r',Math.max(1.6,r)));
+ const lab=document.getElementById('maplabels');
+ if(MAPVIEW.w<560){lab.innerHTML=CITIES.map(ct=>`<text class="citylabel" x="${ct.x+5*(MAPVIEW.w/1000)}" y="${ct.y+2}" style="font-size:${9*(MAPVIEW.w/1000)}px">${ct.name}</text>`).join('');}
+ else lab.innerHTML='';
+}
+function mountMap(founding){
+ MAPVIEW={x:0,y:0,w:1000,h:460};
+ const svg=document.getElementById('worldmap');if(!svg)return;applyMapView();
+ let dragging=false,moved=false,sx=0,sy=0,vx=0,vy=0;
+ function pt(e){return {x:e.touches?e.touches[0].clientX:e.clientX,y:e.touches?e.touches[0].clientY:e.clientY};}
+ svg.addEventListener('pointerdown',e=>{dragging=true;moved=false;const p=pt(e);sx=p.x;sy=p.y;vx=MAPVIEW.x;vy=MAPVIEW.y;svg.classList.add('drag');svg.setPointerCapture&&svg.setPointerCapture(e.pointerId);});
+ svg.addEventListener('pointermove',e=>{if(!dragging)return;const p=pt(e);const rect=svg.getBoundingClientRect();const sc=MAPVIEW.w/rect.width;const dx=(p.x-sx)*sc,dy=(p.y-sy)*sc;if(Math.abs(p.x-sx)+Math.abs(p.y-sy)>4)moved=true;MAPVIEW.x=clamp(vx-dx,-50,1050-MAPVIEW.w);MAPVIEW.y=clamp(vy-dy,-30,490-MAPVIEW.h);applyMapView();});
+ svg.addEventListener('pointerup',e=>{dragging=false;svg.classList.remove('drag');});
+ svg.addEventListener('pointerleave',()=>{dragging=false;svg.classList.remove('drag');});
+ svg.addEventListener('wheel',e=>{e.preventDefault();const rect=svg.getBoundingClientRect();const cx=MAPVIEW.x+((e.clientX-rect.left)/rect.width)*MAPVIEW.w;const cy=MAPVIEW.y+((e.clientY-rect.top)/rect.height)*MAPVIEW.h;mapZoom(e.deltaY<0?0.85:1.18,cx,cy);},{passive:false});
+ document.querySelectorAll('#mapcities .citydot').forEach(dot=>{dot.addEventListener('pointerup',e=>{if(moved)return;e.stopPropagation();openCity(dot.getAttribute('data-city'),founding);});});
+}
+function openCity(cityKey,founding){
+ const ct=CITYBY[cityKey];const panel=document.getElementById('citypanel');
+ // hot subgenres in this city's hubs/region
+ const region=ct.region;
+ const subsRanked=SUBS.map(s=>({s,sz:marketSize(s.id,region)*cityHubBoost(ct,s.ind)})).sort((a,b)=>b.sz-a.sz);
+ const hot=subsRanked.filter(o=>ct.hubs.includes(o.s.ind)).slice(0,6);
+ const others=subsRanked.filter(o=>!ct.hubs.includes(o.s.ind)).slice(0,6);
+ const here=G.companies.filter(c=>c.alive&&c.hqCity===cityKey).sort((a,b)=>b.valuation-a.valuation).slice(0,6);
+ const compLvl=(sid)=>{const l=companiesInMarket(sid,region);const strong=l.filter(x=>x.c.product>55).length;const lv=strong>=3?['high','var(--red)']:strong>=1?['medium','var(--gold2)']:['open','var(--green)'];return `<span style="color:${lv[1]};font-size:10px">●</span> <span class="dim" style="font-size:10px">${lv[0]}</span>`;};
+ const tile=o=>`<div class="subtile" onclick="${founding?`chooseFound('${cityKey}','${o.s.id}')`:`A.launch('${o.s.id}','${region}');closeCity()`}"><div><div class="gold" style="font-size:13px">${o.s.name}</div><div class="dim" style="font-size:11px">${o.s.indName} · ${money(o.sz)} · ${compLvl(o.s.id)}</div></div><div class="hot">${ct.hubs.includes(o.s.ind)?'★ hub':''}</div></div>`;
+ panel.innerHTML=`<div class="flexb"><h3 style="color:var(--gold2)">${ct.name}</h3><button class="btn sm ghost" onclick="closeCity()">✕</button></div>
+  <div class="dim" style="font-size:12px;margin-bottom:10px">${REGIONS[ct.region]} · hubs: ${ct.hubs.map(h=>INDUSTRIES.find(i=>i.key===h).name).join(', ')}</div>
+  <div class="sectionttl">${founding?'Found a startup in':'Launch a new product in'}</div>
+  ${hot.map(tile).join('')}
+  <div class="sectionttl" style="margin-top:10px">Other markets</div>
+  ${others.map(tile).join('')}
+  ${here.length?`<div class="sectionttl" style="margin-top:12px">Companies here</div>${here.map(c=>`<div class="colist">${logoHTML(c,28)}<div style="flex:1"><div style="font-size:13px;color:${c.isPlayer?'var(--gold2)':'var(--text)'}">${c.name}</div><div class="dim" style="font-size:11px">${SUBBY[c.markets[0].subId].name} · ${money(c.valuation)}</div></div></div>`).join('')}`:''}`;
+ panel.classList.add('open');
+}
+window.openCity=openCity;
+function closeCity(){const p=document.getElementById('citypanel');if(p)p.classList.remove('open');}
+window.closeCity=closeCity;
+function chooseFound(cityKey,subId){
+ const sub=SUBBY[subId];
+ openModal(`<h2>Found your startup</h2><div class="muted" style="font-size:13px">${sub.name} · ${CITYBY[cityKey].name}</div>
+  <label class="fld">Company name</label><input type="text" id="conm" value="${genCompanyName(sub.ind)}">
+  <div style="margin-top:16px" class="flexb"><button class="btn ghost" onclick="closeModal()">Back</button><button class="btn primary" onclick="confirmFound('${cityKey}','${subId}')">Launch →</button></div>`);
+}
+window.chooseFound=chooseFound;
+function confirmFound(cityKey,subId){
+ const nm=(document.getElementById('conm').value||'').trim()||genCompanyName(SUBBY[subId].ind);
+ if(G.phase==='found'){ // serial founder
+  const f=G.chars[G.founderId];
+  const co=makeCompany({subId,region:CITYBY[cityKey].region,city:cityKey,isPlayer:true,founderId:f.id,name:nm,product:clamp(30+f.stats.product,1,100),brand:10,scale:14,cash:1.5+(G._foundWindfall||0)*0.3,stage:'Bootstrapped',employees:6,traction:2.4,ownership:1});
+  G.companies.push(co);G.playerCoId=co.id;G.phase='play';G._foundWindfall=0;
+  addFeed('world',`${f.name} founds ${nm} — a fresh ${SUBBY[subId].name} venture in ${CITYBY[cityKey].name}.`);
+  recalcAllFinancials();closeModal();closeCity();SCREEN='company';save();render();
+ } else {
+  // first-time founding from create flow
+  newGame({dynasty:PEND.dynasty,difficulty:PEND.difficulty,founderName:PEND.founderName,age:PEND.age,app:PEND.app,stats:PEND.stats,subId,city:cityKey,company:nm});
+  PEND=null;G.phase='play';SCREEN='company';closeModal();render();
+ }
+}
+window.confirmFound=confirmFound;
+
+/* COMPETE */
+function competeHTML(){
+ const pc=playerCo();
+ return `<div class="card"><h3>Compete <span class="sub">your battle for market share</span></h3>
+ ${pc.markets.map(m=>{const list=shareIn(m.subId,m.region).slice().sort((a,b)=>b.share-a.share).slice(0,8);const sub=SUBBY[m.subId];
+  return `<div style="margin-bottom:18px"><div class="flexb"><div class="gold" style="font-family:var(--serif);font-size:16px">${sub.name} <span class="dim" style="font-size:12px">· ${REGIONS[m.region]}</span></div><div class="num dim" style="font-size:12px">market ${money(marketSize(m.subId,m.region))}/yr</div></div>
+  <table style="margin-top:6px"><tr><th>#</th><th>Company</th><th>Share</th><th>Users</th><th>Val</th></tr>
+  ${list.map((o,i)=>`<tr ${o.c.isPlayer?'style="background:rgba(200,162,76,.08)"':''}><td class="num">${i+1}</td><td><div class="pcard">${logoHTML(o.c,24)}<span style="${o.c.isPlayer?'color:var(--gold2)':''}">${o.c.name}</span></div></td><td class="num">${pct(o.m.share||0)}</td><td class="num">${users((o.m.share||0)*(marketSize(o.m.subId,o.m.region)/sub.arpu))}</td><td class="num">${money(o.c.valuation)}</td></tr>`).join('')}
+  </table></div>`;}).join('')}
+ </div>`;
+}
+
+/* DEALS */
+function dealsHTML(){
+ const pc=playerCo();
+ // acquisition targets: companies in your markets or smaller than you
+ const targets=G.companies.filter(c=>c.alive&&!c.isPlayer&&c.valuation<pc.valuation*0.8).sort((a,b)=>{
+  const aShared=a.markets.some(m=>pc.markets.some(pm=>pm.subId===m.subId));const bShared=b.markets.some(m=>pc.markets.some(pm=>pm.subId===m.subId));
+  return (bShared-aShared)||(b.valuation-a.valuation);}).slice(0,20);
+ return `<div class="row"><div class="col"><div class="card"><h3>Acquisition Targets <span class="sub">buy out the competition</span></h3>
+  <div class="dim" style="font-size:12px;margin-bottom:8px">You have ${money(pc.cash)} cash${pc.stage==='Public'?' · public: can pay in stock':''}. Acquiring absorbs their users and markets.</div>
+  ${targets.map(c=>{const cost=c.valuation*1.3;const shared=c.markets.some(m=>pc.markets.some(pm=>pm.subId===m.subId));return `<div class="colist">${logoHTML(c,34)}<div style="flex:1"><div style="font-size:14px">${c.name} ${shared?'<span class="tag gold" style="font-size:9px">your market</span>':''}</div><div class="dim" style="font-size:11px">${SUBBY[c.markets[0].subId].name} · ${money(c.valuation)} · ${c.markets.length} market(s)</div></div><button class="btn sm ${pc.cash>=cost||pc.stage==='Public'?'primary':''}" onclick="A.acquire('${c.id}')">Buy ${money(cost)}</button></div>`;}).join('')||'<div class="dim">No smaller rivals available right now.</div>'}
+ </div></div>
+ <div class="col"><div class="card"><h3>Expand <span class="sub">grow into new markets</span></h3>
+  <div class="muted" style="font-size:13px;margin-bottom:8px">Use the <b>Map</b> to launch your product in new cities and niches. Dominate one before spreading too thin.</div>
+  <button class="btn primary" onclick="go('map')">Open the Map →</button>
+  <div class="sep"></div>
+  <div class="sectionttl">Your stake</div>
+  <div class="metric"><div class="k">Family ownership of ${pc.name}</div><div class="v">${pct(pc.ownership)}</div><div class="d flat">worth ${money(pc.valuation*pc.ownership)}</div></div>
+  <div class="metric" style="margin-top:8px"><div class="k">Lifetime exits</div><div class="v">${G.exits} · ${money(G.netWorth)}</div></div>
+ </div></div></div>`;
+}
+
+/* TEAM */
+function teamHTML(){
+ ensureTalent();const pc=playerCo();
+ const team=Object.values(G.chars).filter(c=>c.alive&&(c.role==='Executive'||c.id===G.founderId));
+ const row=c=>`<tr class="click" onclick="openChar('${c.id}')"><td><div class="pcard"><canvas class="portrait" data-char="${c.id}" style="width:40px"></canvas><div><div class="gold">${c.name}</div><div class="dim" style="font-size:11px">${c.role} · age ${c.age}</div></div></div></td><td class="num">${overall(c)}</td><td>${c.traits.slice(0,2).map(t=>`<span class="tag" style="margin-right:3px">${t}</span>`).join('')}</td></tr>`;
+ return `<div class="row"><div class="col"><div class="card"><h3>Your Team</h3><table><tr><th>Person</th><th>Rating</th><th>Traits</th></tr>${team.map(row).join('')}</table></div></div>
+ <div class="col"><div class="card"><h3>Talent Pool <span class="sub">hire executives</span></h3><table><tr><th>Person</th><th>Rating</th><th>Traits</th></tr>${G.talent.map(row).join('')}</table></div></div></div>`;
+}
+
+/* DYNASTY */
+function dynastyHTML(){
+ const fam=Object.values(G.chars).filter(c=>c.family==='dynasty').sort((a,b)=>b.age-a.age);
+ const card=c=>`<div class="card" style="padding:11px;margin-bottom:8px"><div class="pcard"><canvas class="portrait" data-char="${c.id}" style="width:50px"></canvas><div style="flex:1"><div class="flexb"><span class="gold" style="font-family:var(--serif);font-size:15px">${c.name}</span>${c.id===G.founderId?'<span class="tag gold">Head</span>':(G.heirId===c.id?'<span class="tag gold">Heir</span>':'')}</div><div class="muted" style="font-size:12px">${c.role} · age ${c.age} ${!c.alive?'· <span style="color:var(--red)">deceased</span>':''}</div>${c.alive&&c.id!==G.founderId&&c.age>=16?`<button class="btn sm" style="margin-top:6px" onclick="A.designateHeir('${c.id}')">Name as heir</button>`:''}</div></div></div>`;
+ return `<div class="row"><div class="col" style="flex:1.1"><div class="card"><h3>House of ${G.dynasty}</h3>${fam.map(card).join('')}</div></div>
+ <div class="col"><div class="card"><h3>Legacy</h3>
+  <div class="metric"><div class="k">Family wealth</div><div class="v gold">${money((playerCo()?playerCo().valuation*playerCo().ownership:0)+G.netWorth)}</div></div>
+  <div class="metric" style="margin-top:8px"><div class="k">Companies exited</div><div class="v">${G.exits}</div></div>
+  <div class="metric" style="margin-top:8px"><div class="k">Prestige</div><div class="v">${Math.round(G.prestige)}</div></div>
+  <div class="dim" style="font-size:12px;margin-top:10px">When the head of the family dies, your heir takes over the company. Children inherit your traits — and your appearance.</div>
+ </div></div></div>`;
+}
+
+/* WORLD / rankings */
+function worldHTML(){
+ const top=G.companies.filter(c=>c.alive).sort((a,b)=>b.valuation-a.valuation).slice(0,25);
+ return `<div class="row"><div class="col" style="flex:1.2"><div class="card"><h3>Most Valuable Companies</h3><table><tr><th>#</th><th>Company</th><th>Industry</th><th>Valuation</th><th>Rev/yr</th></tr>
+ ${top.map((c,i)=>`<tr ${c.isPlayer?'style="background:rgba(200,162,76,.08)"':''} class="click" onclick="openCo('${c.id}')"><td class="num">${i+1}</td><td><div class="pcard">${logoHTML(c,24)}<span style="${c.isPlayer?'color:var(--gold2)':''}">${c.name}</span></div></td><td class="muted">${SUBBY[c.markets[0].subId].indName}</td><td class="num">${money(c.valuation)}</td><td class="num">${money(c.revenue*12)}</td></tr>`).join('')}
+ </table></div></div>
+ <div class="col"><div class="card"><h3>World Feed</h3><div class="feed">${G.feed.slice(0,40).map(feedHTML).join('')}</div></div></div></div>`;
+}
+function openCo(id){const c=G.companies.find(x=>x.id===id);if(!c)return;openModal(`<div class="flexb"><div class="pcard">${logoHTML(c,40)}<div><h2 style="margin:0">${c.name}</h2><div class="dim" style="font-size:12px">${SUBBY[c.markets[0].subId].indName} · ${c.stage}</div></div></div></div>
+ <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:14px"><div class="metric"><div class="k">Valuation</div><div class="v gold">${money(c.valuation)}</div></div><div class="metric"><div class="k">Revenue/yr</div><div class="v">${money(c.revenue*12)}</div></div><div class="metric"><div class="k">Users</div><div class="v">${users(c.users||0)}</div></div></div>
+ <div class="sectionttl" style="margin-top:14px">Markets</div>${c.markets.map(m=>{shareIn(m.subId,m.region);return `<div class="colist"><div style="flex:1"><div class="gold" style="font-size:13px">${SUBBY[m.subId].name}</div><div class="dim" style="font-size:11px">${REGIONS[m.region]}</div></div><div class="num gold">${pct(m.share||0)}</div></div>`;}).join('')}
+ <div style="margin-top:14px"><button class="btn ghost" onclick="closeModal()">Close</button></div>`,true);}
+window.openCo=openCo;
+
+/* portraits */
+function mountPortraits(){document.querySelectorAll('canvas.portrait[data-char]').forEach(cv=>{const c=G.chars[cv.getAttribute('data-char')]||(G.talent&&G.talent.find(t=>t.id===cv.getAttribute('data-char')));if(c)drawPortrait(cv,c);});}
+
+/* modal/events */
+function openModal(html,wide){document.getElementById('modalroot').innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal ${wide?'wide':''}">${html}</div></div>`;document.querySelectorAll('#modalroot canvas.portrait[data-char]').forEach(cv=>{const c=G.chars[cv.getAttribute('data-char')]||(G.talent&&G.talent.find(t=>t.id===cv.getAttribute('data-char')));if(c)drawPortrait(cv,c);});}
+function closeModal(){document.getElementById('modalroot').innerHTML='';if(G&&G.eventQueue.length)showEvent();}
+window.closeModal=closeModal;
+function showEvent(){if(!G.eventQueue.length||document.querySelector('.overlay'))return;const e=G.eventQueue[0];openModal(`<h2>${e.title}</h2>${e.body||''}<div style="margin-top:8px">${e.choices.map((c,i)=>`<button class="choice" onclick="resolveEvent(${i})">${c.t}${c.eff?`<div class="eff">${c.eff}</div>`:''}</button>`).join('')}</div>`);}
+function resolveEvent(i){const e=G.eventQueue.shift();try{if(e.choices[i].fn)e.choices[i].fn();}catch(err){}document.getElementById('modalroot').innerHTML='';recalcAllFinancials();save();render();}
+window.resolveEvent=resolveEvent;
+
+function openInvest(kind){const pc=playerCo();const max=Math.max(1,Math.floor(pc.cash));const def=Math.min(max,Math.max(1,Math.floor(pc.cash*0.3)));
+ const lbl={product:'Product & engineering',brand:'Marketing & brand',ops:'Hiring & operations'}[kind];
+ openModal(`<h2>${lbl}</h2><div class="muted" style="font-size:13px">You have ${money(pc.cash)}.</div>
+ <label class="fld">Amount ($M)</label><input type="range" id="iamt" class="range" min="1" max="${max}" value="${def}" oninput="document.getElementById('iout').textContent=this.value"><div class="num gold" style="margin:4px 0"><span id="iout">${def}</span> M</div>
+ <div style="margin-top:14px" class="flexb"><button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="A.doInvest('${kind}',+document.getElementById('iamt').value)">Invest</button></div>`);}
+function openChar(id){const c=G.chars[id]||G.talent.find(t=>t.id===id);if(!c)return;const isTal=G.talent&&!!G.talent.find(t=>t.id===id);
+ const stat=k=>`<div style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px"><span style="width:70px;color:var(--muted)">${STATLBL[k]}</span><div class="bar" style="flex:1"><span style="width:${c.stats[k]/20*100}%"></span></div><span class="num gold" style="width:22px;text-align:right">${c.stats[k]}</span></div>`;
+ openModal(`<div class="row" style="gap:14px"><div style="flex:none"><canvas class="portrait" data-char="${c.id}" style="width:110px"></canvas></div><div style="flex:1"><h2 style="margin-bottom:2px">${c.name}</h2><div class="muted" style="font-size:13px">${c.role} · age ${c.age}</div><div style="margin-top:6px">${c.traits.map(t=>`<span class="tag gold" style="margin-right:4px">${t}</span>`).join('')}</div></div></div><div class="sep"></div>${STATKEYS.map(stat).join('')}<div style="margin-top:14px" class="flexb"><button class="btn ghost" onclick="closeModal()">Close</button>${isTal?`<button class="btn primary" onclick="A.hire('${c.id}')">Hire — ${money(2+overall(c)*0.1)}</button>`:''}</div>`,true);}
+window.openChar=openChar;
+
+/* ===================== CHARACTER CREATION ===================== */
+let PEND=null;
+function createHTML(){
+ if(!PEND)PEND={dynasty:'',difficulty:'standard',founderName:'',age:30,app:defaultAppearance(false),stats:{vision:9,product:9,growth:8,finance:8,grit:8},points:6,gender:'he'};
+ const a=PEND.app;
+ return `<div class="setup"><div class="hero"><h1>Founder</h1><p>Create yourself, then drop into the world and build a company from nothing.</p></div>
+  ${hasSave()?`<div class="card" style="margin-bottom:14px"><div class="flexb"><div><b class="gold">Continue your story?</b><div class="dim" style="font-size:12px">A saved game was found.</div></div><button class="btn primary" onclick="resume()">Resume</button></div></div>`:''}
+  <div class="card"><div class="creategrid">
+   <div style="text-align:center"><canvas class="portrait" id="cpreview" style="width:150px"></canvas><div class="dim" style="font-size:11px;margin-top:8px">your founder</div></div>
+   <div>
+    <label class="fld">Your name</label><input type="text" id="c_name" value="${PEND.founderName}" placeholder="${(PEND.gender==='she'?pick(FIRST_F):pick(FIRST_M))}" oninput="PEND.founderName=this.value">
+    <label class="fld">Family / dynasty name</label><input type="text" id="c_dyn" value="${PEND.dynasty}" placeholder="Vance" oninput="PEND.dynasty=this.value">
+    <label class="fld">Pronouns</label><div class="pills">${[['he','he/him'],['she','she/her'],['they','they/them']].map(g=>`<button class="pill ${PEND.gender===g[0]?'on':''}" onclick="setGender('${g[0]}')">${g[1]}</button>`).join('')}</div>
+    <label class="fld">Skin tone</label><div class="swatches">${SKIN.map((s,i)=>`<div class="swatch ${a.sk===i?'on':''}" style="background:${s}" title="${SKIN_LBL[i]}" onclick="setApp('sk',${i})"></div>`).join('')}</div>
+    <label class="fld">Hair color</label><div class="swatches">${HAIRC.map((s,i)=>`<div class="swatch ${a.hr===i?'on':''}" style="background:${s}" title="${HAIRC_LBL[i]}" onclick="setApp('hr',${i})"></div>`).join('')}</div>
+    <label class="fld">Hair style</label><div class="pills">${HAIRSTYLES.map(s=>`<button class="pill ${a.style===s?'on':''}" onclick="setAppV('style','${s}')">${s}</button>`).join('')}</div>
+    <label class="fld">Eyes</label><div class="swatches">${EYEC.map((s,i)=>`<div class="swatch ${a.ey===i?'on':''}" style="background:${s}" title="${EYEC_LBL[i]}" onclick="setApp('ey',${i})"></div>`).join('')}</div>
+    <div class="flexb" style="margin-top:10px"><label class="pill ${a.glasses?'on':''}" onclick="toggleApp('glasses')">Glasses</label><label class="pill ${a.fac!=='none'?'on':''}" onclick="cycleFacial()">Facial: ${a.fac}</label><button class="btn sm ghost" onclick="randomizeApp()">🎲 Randomize</button></div>
+   </div>
+  </div>
+  <div class="sep"></div>
+  <div class="row"><div class="col">
+   <div class="sectionttl">Founder strengths — <span class="gold num">${PEND.points}</span> points left</div>
+   ${STATKEYS.map(k=>`<div style="display:flex;align-items:center;gap:8px;margin:6px 0"><span style="width:70px;color:var(--muted);font-size:13px">${STATLBL[k]}</span><button class="btn sm" onclick="cstat('${k}',-1)">−</button><span class="num gold" style="width:22px;text-align:center">${PEND.stats[k]}</span><button class="btn sm" onclick="cstat('${k}',1)">+</button><div class="bar" style="flex:1"><span style="width:${PEND.stats[k]/16*100}%"></span></div></div>`).join('')}
+  </div><div class="col">
+   <label class="fld">Difficulty</label><div class="pills">${['relaxed','standard','cutthroat'].map(d=>`<button class="pill ${PEND.difficulty===d?'on':''}" onclick="PEND.difficulty='${d}';reCreate()">${d}</button>`).join('')}</div>
+   <div class="dim" style="font-size:12px;margin-top:14px">Next you'll open the world map, zoom into a city, and choose the niche to launch your startup in.</div>
+  </div></div>
+  <div style="margin-top:18px;text-align:center"><button class="btn primary" style="padding:12px 28px;font-size:16px" onclick="toFounding()">Enter the World →</button></div>
+  </div></div>`;
+}
+function reCreate(){document.getElementById('root').innerHTML=createHTML();bindCreate();}
+function bindCreate(){const cv=document.getElementById('cpreview');if(cv)drawPortrait(cv,{app:PEND.app});}
+function setApp(k,v){PEND.app[k]=v;reCreate();}
+function setAppV(k,v){PEND.app[k]=v;reCreate();}
+function toggleApp(k){PEND.app[k]=!PEND.app[k];reCreate();}
+function cycleFacial(){const opts=PEND.app.fem?['none']:['none','stubble','must','beard'];const i=opts.indexOf(PEND.app.fac);PEND.app.fac=opts[(i+1)%opts.length];reCreate();}
+function setGender(g){PEND.gender=g;PEND.app.fem=(g==='she');if(PEND.app.fem)PEND.app.fac='none';reCreate();}
+function randomizeApp(){const g=PEND.gender;PEND.app=randomAppearance();PEND.app.fem=(g==='she');if(PEND.app.fem)PEND.app.fac='none';reCreate();}
+function cstat(k,d){if(d>0&&PEND.points<=0)return;if(d<0&&PEND.stats[k]<=1)return;if(d>0&&PEND.stats[k]>=16)return;PEND.stats[k]+=d;PEND.points-=d;reCreate();}
+window.setApp=setApp;window.setAppV=setAppV;window.toggleApp=toggleApp;window.cycleFacial=cycleFacial;window.setGender=setGender;window.randomizeApp=randomizeApp;window.cstat=cstat;window.reCreate=reCreate;
+function toFounding(){
+ PEND.dynasty=(PEND.dynasty||'').trim()||pick(SURNAMES);
+ PEND.founderName=(PEND.founderName||'').trim()||((PEND.gender==='she'?pick(FIRST_F):pick(FIRST_M))+' '+PEND.dynasty);
+ // temp game shell so map renders in founding mode
+ RNG=rngFrom((Date.now()^hash(PEND.dynasty))>>>0);
+ G={phase:'found',companies:[],chars:{},feed:[],eventQueue:[],auto:false,gameOver:false,dynasty:PEND.dynasty,year:2025,month:1,macro:1.0,netWorth:0,exits:0,prestige:0,talent:[]};
+ newWorld(); // so cities show companies + market sizes
+ SCREEN='map';render();
+}
+window.toFounding=toFounding;
+function resume(){if(load()){G.phase=G.phase||'play';SCREEN='company';render();}}
+window.resume=resume;
+function confirmNew(){openModal(`<h2>Start over?</h2><p class="muted">This ends your current game and erases the save.</p><div class="flexb" style="margin-top:16px"><button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="reallyNew()">New Game</button></div>`);}
+window.confirmNew=confirmNew;
+function reallyNew(){wipe();G=null;PEND=null;document.getElementById('modalroot').innerHTML='';render();}
+window.reallyNew=reallyNew;
+
+function overHTML(){const pc=playerCo();return `<div class="setup"><div class="hero"><h1>${G.finalReason}</h1><p>The story of the ${G.dynasty} family</p></div><div class="card center"><div class="metric" style="display:inline-block;min-width:220px"><div class="k">Legacy Score</div><div class="v" style="font-size:34px;color:var(--gold2)">${(G.finalScore||0).toLocaleString()}</div></div><div class="sep"></div><div class="row" style="justify-content:center"><div class="metric"><div class="k">Final company</div><div class="v" style="font-size:15px">${pc?pc.name:'—'}</div></div><div class="metric"><div class="k">Family wealth</div><div class="v">${money((pc?pc.valuation*pc.ownership:0)+G.netWorth)}</div></div><div class="metric"><div class="k">Exits</div><div class="v">${G.exits}</div></div><div class="metric"><div class="k">Year</div><div class="v num">${G.year}</div></div></div><div style="margin-top:20px"><button class="btn primary" style="padding:12px 28px" onclick="reallyNew()">Begin Anew →</button></div></div></div>`;}
+
+
+/* ================= WEALTH · ASSETS · SPORTS · NARRATIVE ================= */
+function initWealth(){
+ if(!G)return;
+ if(G.personalCash==null)G.personalCash=0.25;
+ if(G.salary==null)G.salary=0;
+ if(!G.assets)G.assets=[];
+ if(!G.teams)G.teams=[];
+ if(!G.industryMacro)G.industryMacro={tech:1,health:1,fin:1,cons:1,media:1,energy:1,logi:1};
+ if(G.sportsMacro==null)G.sportsMacro=1;
+ if(!G.assetMacro)G.assetMacro={};
+ if(!G.narr)G.narr=[];
+ if(!G.wealthHist)G.wealthHist=[];
+ if(!G.assetMarket)refreshAssetMarket();
+}
+function companyStake(){const pc=playerCo();return (pc&&pc.isPlayer)?pc.valuation*pc.ownership:0;}
+function assetsValue(){return (G.assets||[]).reduce((a,x)=>a+(x.value||0),0);}
+function teamsValue(){return (G.teams||[]).reduce((a,t)=>a+(t.value||0),0);}
+function personalNetWorth(){return (G.personalCash||0)+companyStake()+assetsValue()+teamsValue();}
+
+const ASSET_TYPES=[
+ {cat:'Real Estate',group:'realestate',pool:['Beverly Hills Estate','Manhattan Penthouse','Aspen Chalet','Malibu Beach House','Lake Como Villa','London Townhouse','Dubai Sky Mansion','Hamptons Compound'],min:8,max:120,appr:0.03,yield:0},
+ {cat:'Apartments',group:'realestate',pool:['Downtown Apartment Tower','Suburban Complex','Riverside Lofts','Midtown High-Rise','Garden Apartments','Waterfront Residences'],min:30,max:420,appr:0.022,yield:0.07},
+ {cat:'Cars',group:'vehicles',pool:['Bugatti Hypercar','Vintage Ferrari','Rolls-Royce Phantom','Pagani Roadster','McLaren Collection','Classic Mercedes 300SL'],min:1,max:25,appr:-0.06,yield:0},
+ {cat:'Aircraft',group:'vehicles',pool:['Gulfstream G700','Bombardier Global 7500','Private Helicopter','Citation Longitude'],min:15,max:90,appr:-0.05,yield:0},
+ {cat:'Yachts',group:'vehicles',pool:['90ft Superyacht','Mega-Yacht','Classic Sailing Yacht','Explorer Yacht'],min:8,max:300,appr:-0.04,yield:0},
+ {cat:'Collectibles',group:'collect',pool:['Blue-Chip Art Collection','Rare Watch Vault','Grand Cru Wine Cellar','Sculpture Collection'],min:2,max:60,appr:0.05,yield:0},
+];
+function refreshAssetMarket(){G.assetMarket=[];ASSET_TYPES.forEach(t=>{for(let i=0;i<2;i++){const price=Math.round((t.min+rnd()*(t.max-t.min))*10)/10;G.assetMarket.push({id:uid(),cat:t.cat,group:t.group,name:pick(t.pool),price,appr:t.appr,yieldRate:t.yield||0});}});}
+function tickWealth(){
+ initWealth();const pc=playerCo();
+ if(pc&&pc.isPlayer&&G.salary>0){const pay=G.salary/12;if(pc.cash>pay){pc.cash-=pay;G.personalCash+=pay;}}
+ (G.assets||[]).forEach(a=>{G.personalCash+=(a.income||0)-(a.upkeep||0);const am=(G.assetMacro&&G.assetMacro[a.cat])?(G.assetMacro[a.cat]-1)*0.3:0;a.value=Math.max(0,a.value*(1+(a.appr+am)/12));});
+ if(G.month===1)G.wealthHist.push({y:G.year,nw:personalNetWorth()});
+ if(G.wealthHist.length>140)G.wealthHist.shift();
+}
+const W={
+ setSalary(v){G.salary=clamp(+v||0,0,500);render();},
+ sellShares(frac){const pc=playerCo();if(!pc||!pc.isPlayer)return;const proceeds=pc.valuation*pc.ownership*frac;if(pc.ownership*(1-frac)<0.03){toast('You must keep at least 3% to stay in control.');return;}pc.ownership*=(1-frac);G.personalCash+=proceeds;addFeed('money',`Sold ${pct(frac)} of your stake for ${money(proceeds)}.`);save();render();},
+ dividend(){const pc=playerCo();if(!pc||!pc.isPlayer)return;if(!pc.profitable&&pc.cash<3){toast('Company has no spare cash to distribute.');return;}const amt=Math.max(0,pc.cash*0.3);pc.cash-=amt;G.personalCash+=amt;addFeed('money',`Took a ${money(amt)} owner distribution.`);save();render();},
+ buy(id){initWealth();const m=(G.assetMarket||[]).find(a=>a.id===id);if(!m)return;if(G.personalCash<m.price){toast('Not enough personal cash. Pay yourself first.');return;}G.personalCash-=m.price;const income=m.price*(m.yieldRate||0)/12;const upkeep=(m.yieldRate?0:m.price*0.003);G.assets.push({id:uid(),cat:m.cat,group:m.group,name:m.name,price:m.price,value:m.price,appr:m.appr,income,upkeep,prestige:Math.round(m.price/8)});G.assetMarket=G.assetMarket.filter(a=>a.id!==id);addFeed('money',`Acquired ${m.name} for ${money(m.price)}.`);save();render();},
+ sell(id){const a=(G.assets||[]).find(x=>x.id===id);if(!a)return;const proceeds=a.value*0.96;G.personalCash+=proceeds;G.assets=G.assets.filter(x=>x.id!==id);addFeed('money',`Sold ${a.name} for ${money(proceeds)}.`);save();render();}
+};
+window.W=W;
+
+/* ---------------- SPORTS FRANCHISES ---------------- */
+const LEAGUES=[
+ {key:'fb',name:'Football',positions:['QB','RB','WR','TE','OL','DL','LB','CB','S'],rosterSize:16,games:17,mediaMul:2.4,baseVal:500},
+ {key:'bb',name:'Basketball',positions:['PG','SG','SF','PF','C'],rosterSize:10,games:82,mediaMul:1.8,baseVal:320},
+ {key:'base',name:'Baseball',positions:['SP','RP','C','1B','2B','3B','SS','OF'],rosterSize:14,games:162,mediaMul:1.5,baseVal:300},
+ {key:'soc',name:'Soccer',positions:['GK','DF','MF','FW'],rosterSize:14,games:38,mediaMul:2.0,baseVal:420},
+];
+function leagueByKey(k){return LEAGUES.find(l=>l.key===k);}
+const SPORT_CITIES=[{c:'Dallas',m:1.6},{c:'New York',m:2.0},{c:'Los Angeles',m:1.9},{c:'Chicago',m:1.4},{c:'Boston',m:1.3},{c:'Miami',m:1.2},{c:'San Francisco',m:1.5},{c:'Houston',m:1.3},{c:'London',m:1.7},{c:'Atlanta',m:1.1},{c:'Seattle',m:1.2},{c:'Denver',m:1.0},{c:'Philadelphia',m:1.2},{c:'Phoenix',m:1.0},{c:'Toronto',m:1.2},{c:'Las Vegas',m:1.1}];
+const MASCOTS=['Stallions','Comets','Sentinels','Vipers','Monarchs','Titans','Outlaws','Glaciers','Foxes','Pioneers','Dragons','Mariners','Aviators','Wolves','Royals','Storm','Blaze','Kings','Empire','Union','Renegades','Phantoms'];
+const PFIRST=['Jalen','Marcus','Tyrese','Deshawn','Cooper','Mason','Diego','Andre','Kai','Cody','Trey','Xavier','Bo','Cade','Rashad','Theo','Malik','Owen','Zane','Devon','Caleb','Nico'];
+const PLAST=['Carter','Brooks','Hayes','Sanders','Monroe','Vega','Cross','Stone','Reed','Frost','Bishop','Nash','Webb','Pierce','Hale','Quinn','Dorsey','Banks','Cole','Shaw','Hunt','Mercer'];
+function makePlayer(lg,avg){const ovr=clamp(Math.round((avg||62)+ri(-12,16)),40,99);const age=ri(21,34);const pot=clamp(ovr+(age<25?ri(0,12):ri(-4,4)),40,99);const salary=Math.round((Math.pow(Math.max(0,ovr-50),1.7)*0.02+0.4)*10)/10;return {id:uid(),name:pick(PFIRST)+' '+pick(PLAST),pos:pick(lg.positions),ovr,pot,age,salary,years:ri(1,4)};}
+function makeSportsTeam(lg,cityObj,owned){const roster=[];for(let i=0;i<lg.rosterSize;i++)roster.push(makePlayer(lg,owned?59:63));const t={id:uid(),league:lg.key,name:cityObj.c+' '+pick(MASCOTS),city:cityObj.c,market:cityObj.m,roster,coach:ri(50,76),stadium:{name:cityObj.c+' Field',capacity:ri(34,68)*1000,quality:ri(45,82)},ticketPrice:Math.round(45+cityObj.m*45),fanHappiness:ri(45,70),record:{w:0,l:0},gamesPlayed:0,seasons:0,titles:0,playoffs:0,strategy:'balanced',owned:!!owned,value:0};t.value=teamValue(t,lg);return t;}
+function teamStrength(t){const lg=leagueByKey(t.league);const s=t.roster.slice().sort((a,b)=>b.ovr-a.ovr).slice(0,Math.ceil(lg.rosterSize*0.6));const avg=s.reduce((a,p)=>a+p.ovr,0)/Math.max(1,s.length);return clamp(avg*0.8+t.coach*0.15+t.stadium.quality*0.05,30,99);}
+function teamValue(t,lg){lg=lg||leagueByKey(t.league);const tot=t.record.w+t.record.l;const perf=tot>0?t.record.w/tot:0.5;const winLeg=1+t.titles*0.05+(perf-0.5)*0.2;return Math.max(50,lg.baseVal*t.market*(0.6+t.stadium.quality/100)*(0.8+t.stadium.capacity/130000)*winLeg*(G.sportsMacro||1));}
+function payroll(t){return t.roster.reduce((a,p)=>a+p.salary,0);}
+function teamMonthly(t){const lg=leagueByKey(t.league);const media=lg.baseVal*t.market*lg.mediaMul*0.0009;const sponsor=t.stadium.quality/100*t.market*1.1;const up=t.stadium.capacity/1000*0.02+t.coach*0.01;return media+sponsor-payroll(t)/12-up;}
+function simGame(t){const lg=leagueByKey(t.league);const str=teamStrength(t);const opp=clamp(ri(46,82)+(t.strategy==='winnow'?3:t.strategy==='rebuild'?-3:0),30,96);const home=chance(0.5);const p=1/(1+Math.pow(10,(opp-str)/14))+(home?0.04:0);const win=chance(clamp(p,0.02,0.98));if(win)t.record.w++;else t.record.l++;t.gamesPlayed++;if(home){const att=clamp(0.45+t.fanHappiness/200+(win?0.05:0)-(t.ticketPrice/420),0.3,1);const rev=t.stadium.capacity*att*t.ticketPrice/1e6;G.personalCash+=rev*0.35;}t.fanHappiness=clamp(t.fanHappiness+(win?1.1:-0.9),5,100);}
+function endSeason(t){const lg=leagueByKey(t.league);const tot=t.record.w+t.record.l;const wr=tot>0?t.record.w/tot:0;t.seasons++;let champ=false;if(wr>0.55){t.playoffs++;const str=teamStrength(t);let alive=true;for(let r=0;r<3&&alive;r++){const opp=ri(62,90);if(!chance(clamp(1/(1+Math.pow(10,(opp-str)/14)),0.05,0.95)))alive=false;}if(alive){champ=true;t.titles++;t.fanHappiness=clamp(t.fanHappiness+15,5,100);G.prestige+=8;addFeed('world',`🏆 The ${t.name} win the ${lg.name} championship!`);}else addFeed('world',`The ${t.name} reach the ${lg.name} playoffs (${t.record.w}-${t.record.l}).`);}else addFeed('world',`The ${t.name} finish ${t.record.w}-${t.record.l} and miss the playoffs.`);t.lastRecord=t.record.w+'-'+t.record.l;t.roster.forEach(p=>{p.years--;if(p.age<27)p.ovr=clamp(p.ovr+ri(0,2),40,99);else if(p.age>30)p.ovr=clamp(p.ovr-ri(0,3),40,99);p.age++;});t.roster=t.roster.filter(p=>p.years>0||chance(0.4));const dq=clamp(70-(wr-0.5)*40,55,80);while(t.roster.length<lg.rosterSize)t.roster.push(makePlayer(lg,dq));t.record={w:0,l:0};t.gamesPlayed=0;t.value=teamValue(t);}
+function tickTeams(){(G.teams||[]).forEach(t=>{const lg=leagueByKey(t.league);G.personalCash+=teamMonthly(t);const gpm=Math.max(1,Math.round(lg.games/8));for(let i=0;i<gpm&&t.gamesPlayed<lg.games;i++)simGame(t);if(t.gamesPlayed>=lg.games)endSeason(t);t.value=teamValue(t);});}
+const T={
+ buy(id){const m=(G._teamMarket||[]).find(x=>x.id===id);if(!m)return;const price=m.value*1.1;if(G.personalCash<price){toast('Not enough personal cash for this franchise.');return;}G.personalCash-=price;m.owned=true;G.teams.push(m);G._teamMarket=G._teamMarket.filter(x=>x.id!==id);SELTEAM=G.teams.length-1;addFeed('world',`You bought the ${m.name} for ${money(price)}!`);G.prestige+=4;closeModal();save();render();},
+ select(i){SELTEAM=i;render();},
+ ticket(id,v){const t=teamById(id);if(t){t.ticketPrice=clamp(+v||40,20,500);render();}},
+ strategy(id,s){const t=teamById(id);if(t){t.strategy=s;render();}},
+ upgrade(id){const t=teamById(id);if(!t)return;const cost=t.stadium.capacity/1000*1.2+30;if(G.personalCash<cost){toast('Not enough cash ('+money(cost)+').');return;}G.personalCash-=cost;t.stadium.capacity=Math.min(105000,t.stadium.capacity+5000);t.stadium.quality=clamp(t.stadium.quality+6,1,100);addFeed('money',`Renovated ${t.stadium.name} (+5k seats) for ${money(cost)}.`);save();render();},
+ build(id){const t=teamById(id);if(!t)return;const cost=t.market*450+200;if(G.personalCash<cost){toast('A new stadium costs '+money(cost)+'.');return;}G.personalCash-=cost;t.stadium={name:t.city+' Grand Arena',capacity:Math.round(60000+t.market*14000),quality:clamp(82+ri(0,12),1,100)};t.fanHappiness=clamp(t.fanHappiness+10,5,100);addFeed('world',`Opened a brand-new stadium for the ${t.name}!`);save();render();},
+ coach(id){const t=teamById(id);if(!t)return;const cost=12;if(G.personalCash<cost){toast('Hiring a top coach costs '+money(cost)+'.');return;}G.personalCash-=cost;t.coach=clamp(t.coach+ri(4,9),1,99);addFeed('people',`Hired a new head coach for the ${t.name}.`);save();render();},
+ release(id,pid){const t=teamById(id);if(!t)return;t.roster=t.roster.filter(p=>p.id!==pid);render();},
+ signFA(id){openSignFA(id);},
+ doSign(id,pidx){const t=teamById(id);if(!t)return;const fa=G._fa[pidx];const bonus=fa.salary*1.2;if(G.personalCash<bonus){toast('Signing bonus is '+money(bonus)+'.');return;}G.personalCash-=bonus;t.roster.push(fa);G._fa.splice(pidx,1);addFeed('people',`${fa.name} (${fa.pos}, ${fa.ovr} OVR) signs with the ${t.name}.`);closeModal();save();render();},
+ relocate(id){openRelocate(id);},
+ doRelocate(id,ci){const t=teamById(id);if(!t)return;const city=SPORT_CITIES[ci];const cost=120;if(G.personalCash<cost){toast('Relocation costs '+money(cost)+'.');return;}G.personalCash-=cost;t.city=city.c;t.market=city.m;t.name=city.c+' '+t.name.split(' ').slice(-1)[0];t.stadium.name=city.c+' Field';t.fanHappiness=clamp(t.fanHappiness-20,5,100);addFeed('world',`The franchise relocates to ${city.c}!`);closeModal();save();render();},
+ browse(){openTeamMarket();}
+};
+window.T=T;
+function teamById(id){return (G.teams||[]).find(t=>t.id===id);}
+let SELTEAM=0;
+
+/* ---------------- NARRATIVE / MACRO EVENTS ---------------- */
+const NARRATIVE=[
+ {id:'aiboom',label:'The AI Boom',body:'A cascade of breakthroughs sends technology valuations soaring.',years:6,ind:'tech',mult:1.6},
+ {id:'oil',label:'Energy Shock',body:'Geopolitical turmoil spikes energy prices across the globe.',years:4,ind:'energy',mult:1.7,extra:{logi:0.9}},
+ {id:'pandemic',label:'Global Pandemic',body:'A pandemic upends the world — healthcare and remote tech surge as travel and retail collapse.',years:3,ind:'health',mult:1.8,extra:{tech:1.2,logi:0.7,cons:0.85}},
+ {id:'crisis',label:'Financial Crisis',body:'Credit markets seize. Finance is hammered and valuations compress everywhere.',years:4,ind:'fin',mult:0.55,allmacro:0.92},
+ {id:'crypto',label:'Crypto Mania',body:'A speculative frenzy lifts payments, crypto, and fintech.',years:3,ind:'fin',mult:1.3},
+ {id:'green',label:'Green Revolution',body:'Sweeping climate policy pours capital into renewable energy.',years:7,ind:'energy',mult:1.5},
+ {id:'streaming',label:'Streaming Wars',body:'A land-grab for attention inflates media and entertainment.',years:5,ind:'media',mult:1.45},
+ {id:'housing',label:'Housing Boom',body:'A real-estate boom lifts property values worldwide.',years:5,asset:'Real Estate',asset2:'Apartments',amult:1.5},
+ {id:'sportsrights',label:'Media-Rights Explosion',body:'Soaring broadcast deals turn sports franchises into prized trophy assets.',years:8,sports:1.6},
+ {id:'recession',label:'Global Recession',body:'A broad recession cools every market.',years:3,allmacro:0.85},
+ {id:'biotech',label:'Biotech Renaissance',body:'Gene therapies and longevity science ignite a healthcare gold rush.',years:6,ind:'health',mult:1.55},
+];
+function recomputeMacros(){const im={tech:1,health:1,fin:1,cons:1,media:1,energy:1,logi:1};let sm=1;const am={};(G.narr||[]).forEach(a=>{if(a.ind&&a.mult)im[a.ind]*=a.mult;if(a.extra)for(const k in a.extra)im[k]*=a.extra[k];if(a.allmacro)for(const k in im)im[k]*=a.allmacro;if(a.sports)sm*=a.sports;if(a.asset)am[a.asset]=(am[a.asset]||1)*(a.amult||1);if(a.asset2)am[a.asset2]=(am[a.asset2]||1)*(a.amult||1);});G.industryMacro=im;G.sportsMacro=sm;G.assetMacro=am;}
+function narrativeMaybe(){initWealth();G.narr=(G.narr||[]).filter(a=>{a.until--;return a.until>0;});if(chance(0.17)){const act=new Set(G.narr.map(a=>a.id));const avail=NARRATIVE.filter(n=>!act.has(n.id));if(avail.length){const n=pick(avail);G.narr.push(Object.assign({until:n.years},n));addFeed('world',`📰 ${n.label}: ${n.body}`);queueModal({title:'📰 '+n.label,body:`<p class="muted">${n.body}</p><p class="dim" style="font-size:12px">Expected to ripple through markets for about ${n.years} years.</p>`,choices:[{t:'Adapt and press on.',fn(){}}]});}}recomputeMacros();}
+
+/* ---------------- WEALTH UI ---------------- */
+function wealthHTML(){
+ initWealth();const pc=playerCo();
+ const re=(G.assets||[]).filter(a=>a.group==='realestate').reduce((s,a)=>s+a.value,0);
+ const veh=(G.assets||[]).filter(a=>a.group==='vehicles').reduce((s,a)=>s+a.value,0);
+ const col=(G.assets||[]).filter(a=>a.group==='collect').reduce((s,a)=>s+a.value,0);
+ const nw=personalNetWorth();
+ const bd=[['Company stake',companyStake()],['Personal cash',G.personalCash],['Real estate',re],['Vehicles & toys',veh],['Collectibles',col],['Sports franchises',teamsValue()]];
+ const market=G.assetMarket||[];
+ const groups=['Real Estate','Apartments','Cars','Aircraft','Yachts','Collectibles'];
+ return `<div class="row">
+  <div class="col" style="flex:1.1">
+   <div class="card"><h3>Net Worth <span class="sub">your personal balance sheet</span></h3>
+    <div class="metric"><div class="k">Total net worth</div><div class="v gold" style="font-size:28px">${money(nw)}</div></div>
+    <div style="margin-top:10px">${bd.map(b=>`<div class="flexb" style="padding:5px 0;border-bottom:1px solid var(--line)"><span class="muted" style="font-size:13px">${b[0]}</span><span class="num">${money(b[1])}</span></div>`).join('')}</div>
+   </div>
+   <div class="card" style="margin-top:14px"><h3>Pay Yourself <span class="sub">move company money to you</span></h3>
+    <div class="muted" style="font-size:13px">Personal cash: <span class="num gold">${money(G.personalCash)}</span> · Company cash: <span class="num">${money(pc?pc.cash:0)}</span></div>
+    <label class="fld">Annual salary from ${pc?pc.name:'company'} — ${money(G.salary)}</label>
+    <input type="range" class="range" min="0" max="${Math.max(20,Math.round((pc?pc.revenue*12:20)*0.2))}" value="${G.salary}" oninput="W.setSalary(this.value)">
+    <div class="pills" style="margin-top:10px">
+     <button class="btn" onclick="W.dividend()">Take owner distribution</button>
+     <button class="btn" onclick="W.sellShares(0.05)">Sell 5% stake</button>
+     <button class="btn" onclick="W.sellShares(0.10)">Sell 10% stake</button>
+     <button class="btn" onclick="W.sellShares(0.25)">Sell 25% stake</button>
+    </div>
+    <div class="dim" style="font-size:12px;margin-top:8px">You currently own ${pc?pct(pc.ownership):'—'} of your company.</div>
+   </div>
+   <div class="card" style="margin-top:14px"><h3>Your Assets <span class="sub">${(G.assets||[]).length} owned</span></h3>
+    ${(G.assets||[]).length?(G.assets||[]).map(a=>`<div class="colist"><div style="flex:1"><div class="gold" style="font-size:13px">${a.name}</div><div class="dim" style="font-size:11px">${a.cat} · paid ${money(a.price)}${a.income?' · +'+money(a.income*12)+'/yr':''}</div></div><div style="text-align:right"><div class="num">${money(a.value)}</div><button class="btn sm ghost" onclick="W.sell('${a.id}')">Sell</button></div></div>`).join(''):'<div class="dim">No assets yet. Buy your first trophy below.</div>'}
+   </div>
+  </div>
+  <div class="col"><div class="card"><h3>Asset Market <span class="sub">spend your fortune</span></h3>
+   <button class="btn sm ghost" style="margin-bottom:8px" onclick="refreshAssetMarket();render()">↻ Refresh listings</button>
+   ${groups.map(g=>{const items=market.filter(m=>m.cat===g);if(!items.length)return '';return `<div class="sectionttl" style="margin-top:8px">${g}</div>${items.map(m=>`<div class="colist"><div style="flex:1"><div style="font-size:13px">${m.name}</div><div class="dim" style="font-size:11px">${m.yieldRate?('rental yield '+pct(m.yieldRate)+'/yr'):(m.appr<0?'depreciates':'appreciates')}</div></div><button class="btn sm ${G.personalCash>=m.price?'primary':''}" onclick="W.buy('${m.id}')">${money(m.price)}</button></div>`).join('')}`;}).join('')}
+  </div></div>
+ </div>`;
+}
+
+/* ---------------- FRANCHISE UI ---------------- */
+function franchiseHTML(){
+ initWealth();
+ if(!(G.teams||[]).length){
+  return `<div class="card"><h3>Sports Franchises <span class="sub">own a team · build a dynasty</span></h3>
+   <div class="muted" style="font-size:14px;margin-bottom:10px">As a billionaire CEO you can buy a professional sports franchise and run it hands-on — sign players, build a stadium, set ticket prices, chase championships, even move the team to a new city. Franchises are trophy assets that tend to appreciate over time.</div>
+   <div class="metric" style="margin-bottom:10px"><div class="k">Your personal cash</div><div class="v gold">${money(G.personalCash)}</div><div class="d dim">pay yourself from the Wealth tab to build a war chest</div></div>
+   <button class="btn primary" onclick="T.browse()">Browse Franchises for Sale →</button></div>`;
+ }
+ if(SELTEAM>=G.teams.length)SELTEAM=0;
+ const t=G.teams[SELTEAM];const lg=leagueByKey(t.league);const str=Math.round(teamStrength(t));
+ const switcher=G.teams.length>1?`<div class="pills" style="margin-bottom:10px">${G.teams.map((x,i)=>`<button class="pill ${i===SELTEAM?'on':''}" onclick="T.select(${i})">${x.name}</button>`).join('')}<button class="pill" onclick="T.browse()">+ Buy another</button></div>`:'';
+ const roster=t.roster.slice().sort((a,b)=>b.ovr-a.ovr);
+ return `<div>${switcher}<div class="row">
+  <div class="col" style="flex:1.25">
+   <div class="card"><h3>${t.name} <span class="sub">${lg.name} · ${t.city}</span></h3>
+    <div class="grid" style="grid-template-columns:repeat(4,1fr)">
+     <div class="metric"><div class="k">Franchise value</div><div class="v gold">${money(t.value)}</div></div>
+     <div class="metric"><div class="k">This season</div><div class="v">${t.record.w}-${t.record.l}</div></div>
+     <div class="metric"><div class="k">Titles</div><div class="v">${t.titles}</div></div>
+     <div class="metric"><div class="k">Team rating</div><div class="v">${str}</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:13px" class="flexb"><span class="muted">Fan happiness</span><span class="num">${Math.round(t.fanHappiness)}/100</span></div>
+    <div class="bar green" style="margin-top:4px"><span style="width:${t.fanHappiness}%"></span></div>
+    <div class="sep"></div>
+    <div class="sectionttl">Stadium — ${t.stadium.name}</div>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)"><div class="metric"><div class="k">Capacity</div><div class="v">${(t.stadium.capacity/1000).toFixed(0)}k</div></div><div class="metric"><div class="k">Quality</div><div class="v">${Math.round(t.stadium.quality)}</div></div><div class="metric"><div class="k">Ticket price</div><div class="v">$${t.ticketPrice}</div></div></div>
+    <label class="fld">Ticket price — $${t.ticketPrice}</label><input type="range" class="range" min="20" max="400" value="${t.ticketPrice}" oninput="T.ticket('${t.id}',this.value)">
+    <div class="pills" style="margin-top:8px">
+     <button class="btn sm" onclick="T.upgrade('${t.id}')">Renovate (+5k seats)</button>
+     <button class="btn sm" onclick="T.build('${t.id}')">Build new stadium</button>
+     <button class="btn sm" onclick="T.coach('${t.id}')">Hire head coach</button>
+     <button class="btn sm" onclick="T.signFA('${t.id}')">Sign free agent</button>
+     <button class="btn sm" onclick="T.relocate('${t.id}')">Relocate team</button>
+    </div>
+    <div class="sep"></div>
+    <div class="sectionttl">Strategy</div>
+    <div class="pills">${[['rebuild','Rebuild (youth)'],['balanced','Balanced'],['winnow','Win now']].map(s=>`<button class="pill ${t.strategy===s[0]?'on':''}" onclick="T.strategy('${t.id}','${s[0]}')">${s[1]}</button>`).join('')}</div>
+    <div class="dim" style="font-size:12px;margin-top:8px">Annual payroll ${money(payroll(t))} · monthly P&amp;L ${money(teamMonthly(t))} (before gate revenue) · coach ${Math.round(t.coach)}</div>
+   </div>
+  </div>
+  <div class="col"><div class="card"><h3>Roster <span class="sub">${t.roster.length} players</span></h3>
+   <div class="scrollx"><table><tr><th>Pos</th><th>Player</th><th>Age</th><th>OVR</th><th>POT</th><th>Salary</th><th>Yrs</th><th></th></tr>
+   ${roster.map(p=>`<tr><td class="num">${p.pos}</td><td>${p.name}</td><td class="num">${p.age}</td><td class="num gold">${p.ovr}</td><td class="num dim">${p.pot}</td><td class="num">${money(p.salary)}</td><td class="num">${p.years}</td><td><button class="btn sm ghost" onclick="T.release('${t.id}','${p.id}')">✕</button></td></tr>`).join('')}
+   </table></div></div></div>
+ </div></div>`;
+}
+function openTeamMarket(){
+ if(!G._teamMarket||!G._teamMarket.length){G._teamMarket=[];for(let i=0;i<6;i++){const lg=pick(LEAGUES);const city=pick(SPORT_CITIES);G._teamMarket.push(makeSportsTeam(lg,city,true));}}
+ openModal(`<h2>Franchises for Sale</h2><div class="muted" style="font-size:13px;margin-bottom:6px">Your personal cash: <span class="num gold">${money(G.personalCash)}</span></div>
+  ${G._teamMarket.map(t=>{const lg=leagueByKey(t.league);const price=t.value*1.1;return `<div class="colist"><div style="flex:1"><div class="gold" style="font-size:14px">${t.name}</div><div class="dim" style="font-size:11px">${lg.name} · ${t.city} · ${(t.stadium.capacity/1000).toFixed(0)}k seats · rating ${Math.round(teamStrength(t))}</div></div><button class="btn sm ${G.personalCash>=price?'primary':''}" onclick="T.buy('${t.id}')">${money(price)}</button></div>`;}).join('')}
+  <div style="margin-top:14px"><button class="btn ghost" onclick="closeModal()">Close</button></div>`,true);
+}
+function openSignFA(id){const t=teamById(id);const lg=leagueByKey(t.league);G._fa=[];for(let i=0;i<6;i++)G._fa.push(makePlayer(lg,ri(58,82)));
+ openModal(`<h2>Free Agents</h2><div class="muted" style="font-size:13px;margin-bottom:6px">Sign a player to the ${t.name}. Signing bonus ≈ salary × 1.2.</div>
+  ${G._fa.map((p,i)=>`<div class="colist"><div style="flex:1"><div style="font-size:14px">${p.name} <span class="dim">${p.pos}</span></div><div class="dim" style="font-size:11px">age ${p.age} · ${p.ovr} OVR · ${money(p.salary)}/yr · ${p.years}yr</div></div><button class="btn sm ${G.personalCash>=p.salary*1.2?'primary':''}" onclick="T.doSign('${id}',${i})">Sign ${money(p.salary*1.2)}</button></div>`).join('')}
+  <div style="margin-top:14px"><button class="btn ghost" onclick="closeModal()">Close</button></div>`,true);
+}
+function openRelocate(id){openModal(`<h2>Relocate Franchise</h2><div class="muted" style="font-size:13px;margin-bottom:6px">Moving costs ${money(120)} and angers current fans, but a bigger market means more revenue and value.</div>
+  ${SPORT_CITIES.map((c,i)=>`<div class="colist"><div style="flex:1"><div style="font-size:14px">${c.c}</div><div class="dim" style="font-size:11px">market index ${c.m.toFixed(1)}</div></div><button class="btn sm primary" onclick="T.doRelocate('${id}',${i})">Move here</button></div>`).join('')}
+  <div style="margin-top:14px"><button class="btn ghost" onclick="closeModal()">Close</button></div>`,true);
+}
+window.refreshAssetMarket=refreshAssetMarket;
+
+
+window.onload=function(){render();};
+</script>
+</body>
+</html>
